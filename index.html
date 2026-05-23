@@ -3,230 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rachelle's AI Prototypes</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Rachelle's Prototypes</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --cream: #f8f4ef;
-    --ink: #1c1c1c;
-    --muted: #6b6b6b;
-    --border: #e8e0d4;
-    --blue: #2c5f8a;
-    --blue-light: #e8f0f8;
-    --gold: #c9a227;
-    --card: #ffffff;
-    --radius: 14px;
+    --bg: #f9f8f6;
+    --ink: #1a1a1a;
+    --muted: #888;
+    --accent: #bf4e2b;
+    --rule: #e0dcd6;
   }
 
+  html { font-size: 16px; }
+
   body {
-    background: var(--cream);
+    background: var(--bg);
     color: var(--ink);
-    font-family: 'Inter', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
     min-height: 100vh;
+    padding: 0 24px;
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
   }
 
   /* ── HEADER ── */
-  header {
-    background: linear-gradient(135deg, #1a3d5c 0%, #2c5f8a 100%);
-    color: white;
-    padding: 60px 24px 52px;
-    text-align: center;
+  .site-header {
+    padding: 72px 0 56px;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .header-eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    opacity: 0.65;
-    margin-bottom: 14px;
-  }
-
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3rem);
+  .site-header h1 {
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
     font-weight: 700;
-    line-height: 1.15;
-    margin-bottom: 14px;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--ink);
   }
 
-  header p {
+  .site-header h1 span {
+    color: var(--accent);
+  }
+
+  .site-header .tagline {
+    margin-top: 16px;
     font-size: 1rem;
-    opacity: 0.75;
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
-  .header-divider {
-    width: 48px;
-    height: 2px;
-    background: var(--gold);
-    margin: 24px auto 0;
-    border-radius: 2px;
-  }
-
-  /* ── MAIN GRID ── */
-  main {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 52px 24px 80px;
-  }
-
-  .section-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 24px;
+    line-height: 1.55;
+    max-width: 480px;
   }
 
-  .cards-grid {
+  /* ── PROJECT LIST ── */
+  .projects {
+    padding: 8px 0 80px;
+  }
+
+  .project {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
-
-  /* ── CARD ── */
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px 26px 24px;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: start;
+    column-gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
     text-decoration: none;
     color: var(--ink);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   }
 
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 28px rgba(0,0,0,0.1);
-    border-color: var(--blue);
+  .project:first-child {
+    border-top: none;
   }
 
-  .card-icon {
-    font-size: 2rem;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .card-tag {
-    display: inline-block;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--blue);
-    background: var(--blue-light);
-    padding: 3px 8px;
-    border-radius: 20px;
+  .project-name {
+    font-size: 1.2rem;
     font-weight: 600;
-    width: fit-content;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    grid-column: 1;
+    grid-row: 1;
+    transition: color 0.15s;
   }
 
-  .card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-top: 2px;
+  .project:hover .project-name {
+    color: var(--accent);
   }
 
-  .card p {
+  .project-desc {
     font-size: 0.875rem;
     color: var(--muted);
-    line-height: 1.6;
-    flex: 1;
+    line-height: 1.55;
+    margin-top: 5px;
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 500px;
   }
 
-  .card-arrow {
-    font-size: 0.8rem;
-    color: var(--blue);
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    margin-top: 6px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: gap 0.15s;
+  .project-type {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding-top: 3px;
+    white-space: nowrap;
   }
-
-  .card:hover .card-arrow { gap: 9px; }
 
   /* ── FOOTER ── */
   footer {
-    text-align: center;
-    padding: 28px 24px;
+    padding: 28px 0 40px;
     font-size: 0.75rem;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
+    color: #bbb;
   }
 </style>
 </head>
 <body>
+<div class="page">
 
-<header>
-  <p class="header-eyebrow">Built with AI</p>
-  <h1>Rachelle's Prototypes</h1>
-  <p>A growing collection of interactive tools, apps, and resources.</p>
-  <div class="header-divider"></div>
-</header>
+  <header class="site-header">
+    <h1>Things I've<br>been <span>building.</span></h1>
+    <p class="tagline">A collection of prototypes I've made — faith tools, trackers, and whatever else I felt like making.</p>
+  </header>
 
-<main>
-  <p class="section-label">All Projects</p>
-  <div class="cards-grid">
+  <section class="projects">
 
-    <a class="card" href="/christian-life-profile.html">
-      <div class="card-icon">✝️</div>
-      <span class="card-tag">Assessment</span>
-      <h2>Christian Life Profile</h2>
-      <p>A 120-question discipleship assessment measuring beliefs, practices, and virtues across six dimensions. Based on Randy Frazee's 2000 edition.</p>
-      <div class="card-arrow">Take the assessment →</div>
+    <a class="project" href="/christian-life-profile.html">
+      <div class="project-name">Christian Life Profile Assessment</div>
+      <div class="project-type">Assessment</div>
+      <div class="project-desc">Randy Frazee's 120-question discipleship tool. Measures where you stand across beliefs, practices, and virtues — then shows you the full picture.</div>
     </a>
 
-    <a class="card" href="/bible-verse-spinner.html">
-      <div class="card-icon">🎡</div>
-      <span class="card-tag">Interactive</span>
-      <h2>Bible Verse Spinner</h2>
-      <p>Spin a colorful wheel and receive a word from Scripture. A fun, visual way to land on a Bible verse.</p>
-      <div class="card-arrow">Spin the wheel →</div>
+    <a class="project" href="/bible-verse-spinner.html">
+      <div class="project-name">Bible Verse Spinner</div>
+      <div class="project-type">Interactive</div>
+      <div class="project-desc">A spinning wheel with 12 Bible verses. Hit spin, see where it lands, read the scripture. Simple and kind of satisfying.</div>
     </a>
 
-    <a class="card" href="/bible-verse-rotator.html">
-      <div class="card-icon">📖</div>
-      <span class="card-tag">Daily Tool</span>
-      <h2>Bible Verse Rotator</h2>
-      <p>A fresh verse from the NET Bible every 10 minutes, drawn from over 100 references. Click to jump to the next one anytime.</p>
-      <div class="card-arrow">Read a verse →</div>
+    <a class="project" href="/bible-verse-rotator.html">
+      <div class="project-name">Bible Verse Rotator</div>
+      <div class="project-type">Daily Tool</div>
+      <div class="project-desc">Pulls a real verse from the NET Bible API and rotates to a new one every 10 minutes. Over 100 references in the pool.</div>
     </a>
 
-    <a class="card" href="/sharingwilj/">
-      <div class="card-icon">📚</div>
-      <span class="card-tag">Resource</span>
-      <h2>Sharing WILJ Course Summary</h2>
-      <p>An offboarding and resource guide for the Sharing WILJ course, with curriculum materials and next steps.</p>
-      <div class="card-arrow">View resources →</div>
+    <a class="project" href="/sharingwilj/">
+      <div class="project-name">Sharing WILJ Course Summary</div>
+      <div class="project-type">Resource</div>
+      <div class="project-desc">Offboarding page for the Sharing WILJ course — materials, next steps, and resources all in one place.</div>
     </a>
 
-    <a class="card" href="/moveitmay/">
-      <div class="card-icon">💪</div>
-      <span class="card-tag">Challenge</span>
-      <h2>Move It May</h2>
-      <p>A 20-day movement challenge tracker. Log workouts, react to others, and stay accountable throughout the month.</p>
-      <div class="card-arrow">Open app →</div>
+    <a class="project" href="/moveitmay/">
+      <div class="project-name">Move It May</div>
+      <div class="project-type">App</div>
+      <div class="project-desc">A 20-day movement challenge. Log your workouts, see what others are doing, react with an emoji. Built on Firebase.</div>
     </a>
 
-  </div>
-</main>
+  </section>
 
-<footer>
-  Built by Rachelle &mdash; powered by AI
-</footer>
+  <footer>Rachelle Banks</footer>
 
+</div>
 </body>
 </html>
