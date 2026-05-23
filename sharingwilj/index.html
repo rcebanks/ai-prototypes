@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sharing WILJ Course Offboarding</title>
+<link rel="icon" type="image/png" href="/wilj-favicon-Heart.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=DM+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --orange: #F15D27;
+    --blue: #357CC0;
+    --gold: #C8A96E;
+    --warm-white: #FDFAF6;
+    --ink: #1C1C1C;
+    --muted: #6B6B6B;
+    --border: #E8E0D4;
+    --orange-light: #FEF0EA;
+    --blue-light: #EBF3FB;
+    --gold-light: #F7EFE0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(253,250,246,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--orange);
+    font-style: italic;
+  }
+
+  .nav-links {
+    display: flex; gap: 0.25rem; list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+
+  .nav-links a:hover {
+    background: var(--orange-light);
+    color: var(--orange);
+  }
+
+  /* HERO */
+  .hero {
+    padding: 140px 2rem 80px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    background: var(--orange-light);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.15;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 em {
+    color: var(--orange);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+  }
+
+  .meta-row {
+    display: flex; flex-direction: column; gap: 0.85rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .meta-item {
+    display: flex; flex-direction: row; align-items: baseline; gap: 0.75rem;
+  }
+
+  .meta-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-value {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 80px 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-marker {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--orange);
+  }
+
+  .section-marker.blue-border  { border-left-color: var(--blue); }
+  .section-marker.gold-border  { border-left-color: var(--gold); }
+  .section-marker.ink-border   { border-left-color: var(--ink); }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  .section-sub {
+    font-size: 0.92rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+
+  /* PROPOSAL */
+  .proposal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .prop-cell {
+    background: white;
+    padding: 1.5rem;
+  }
+
+  .prop-cell.full { grid-column: 1 / -1; }
+
+  .prop-cell-label {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .prop-cell-value {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .deliverables-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .deliverables-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+  }
+
+  .deliverables-list li::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .timeline-track::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: linear-gradient(to right, var(--orange), var(--blue));
+    z-index: 0;
+  }
+
+  .tl-node {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.4s ease;
+  }
+
+  .tl-node.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tl-dot {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .tl-dot.n1 { background: var(--orange); }
+  .tl-dot.n2 { background: #C96F40; }
+  .tl-dot.n3 { background: #8B6FA8; }
+  .tl-dot.n4 { background: #4A8BC4; }
+  .tl-dot.n5 { background: var(--blue); }
+
+  .tl-summary {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .tl-date {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .timeline-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .tl-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.35s ease;
+  }
+
+  .tl-card.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .tl-card-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .tl-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.1rem;
+  }
+
+  .tl-card-dot.n1 { background: var(--orange); }
+  .tl-card-dot.n2 { background: #C96F40; }
+  .tl-card-dot.n3 { background: #8B6FA8; }
+  .tl-card-dot.n4 { background: #4A8BC4; }
+  .tl-card-dot.n5 { background: var(--blue); }
+
+  .tl-card-body {}
+
+  .tl-card-date {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .tl-card-desc {
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+
+  /* SCOPE TABLE */
+  .scope-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1.5rem;
+  }
+
+  .scope-table th {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  .scope-table th:first-child {
+    background: #F5F0EB;
+    color: var(--muted);
+    border-radius: 8px 0 0 0;
+    width: 45%;
+  }
+
+  .scope-table th:last-child {
+    background: var(--orange-light);
+    color: var(--orange);
+    border-radius: 0 8px 0 0;
+  }
+
+  .scope-table td {
+    padding: 1rem;
+    font-size: 0.92rem;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .scope-table td:first-child {
+    background: #FAFAF8;
+    color: var(--muted);
+  }
+
+  .scope-table td:last-child {
+    background: white;
+    color: var(--ink);
+  }
+
+  .scope-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+  .scope-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+  .scope-table .new-row td {
+    background: var(--blue-light) !important;
+  }
+
+  .scope-table .new-row td:first-child {
+    font-weight: 600;
+    color: var(--blue) !important;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .added-badge {
+    display: inline-block;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-light);
+    padding: 0.1rem 0.5rem;
+    border-radius: 20px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+
+  /* DELIVERY STATUS */
+  .status-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .status-header {
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background: white;
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .status-header:hover { background: var(--warm-white); }
+
+  .status-header-left {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+
+  .status-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .status-icon.done { background: #E8F5E9; color: #2E7D32; }
+  .status-icon.pending { background: #FFF8E1; color: #F57F17; }
+
+  .status-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .status-tag {
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+  }
+
+  .status-tag.done { background: #E8F5E9; color: #2E7D32; }
+  .status-tag.pending { background: #FFF8E1; color: #F57F17; }
+
+  .status-chevron {
+    font-size: 0.92rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+
+  .status-body {
+    display: none;
+    padding: 0.75rem 1.25rem 1.25rem;
+    border-top: 1px solid var(--border);
+    background: #FAFAF8;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .status-body.open { display: block; }
+  .status-chevron.open { transform: rotate(180deg); }
+
+  /* NEXT STEPS */
+  .next-steps-list {
+    counter-reset: steps;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .next-step {
+    counter-increment: steps;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .next-step:last-child { border-bottom: none; }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--border);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 2rem;
+    text-align: center;
+  }
+
+  .step-num::before { content: counter(steps, decimal-leading-zero); }
+
+  .step-body {}
+
+  .step-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .step-detail {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  /* INVOICE */
+  .invoice-card {
+    border: 2px solid var(--orange);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .invoice-header {
+    background: var(--orange);
+    padding: 1.25rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .invoice-header-title {
+    color: white;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .invoice-header-amount {
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  .invoice-body {
+    background: white;
+    padding: 1.5rem;
+  }
+
+  .invoice-note {
+    font-size: 0.92rem;
+    color: var(--muted);
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+  }
+
+  .invoice-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.92rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .invoice-row:last-of-type { border-bottom: none; }
+
+  .invoice-row .label { color: var(--muted); }
+  .invoice-row .value { font-weight: 600; }
+
+  /* EXPANDED SCOPE */
+  .scope-note-card {
+    background: var(--blue-light);
+    border: 1px solid #C5DCF2;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .scope-note-card h4 {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+
+  .scope-note-card p {
+    font-size: 0.92rem;
+    color: #2C5D8F;
+  }
+
+  /* THANK YOU */
+  .thank-you {
+    text-align: center;
+    padding: 80px 2rem 120px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .thank-you .big-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 1.75rem);
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .thank-you .quote-source {
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .thank-you p {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* HOURS CALLOUT */
+  .hours-callout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+
+  .hours-cell {
+    background: white;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .hours-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .hours-num.orange { color: var(--orange); }
+  .hours-num.blue { color: var(--blue); }
+  .hours-num.gold { color: var(--gold); }
+
+  .hours-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.92rem;
+    color: var(--muted);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* COMPARE BLOCKS */
+  .compare-heading {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .compare-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .compare-cell {
+    background: white;
+    padding: 2rem 1.75rem;
+  }
+
+  .compare-label {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .compare-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .compare-big.orange { color: var(--orange); }
+  .compare-big.blue { color: var(--blue); }
+
+  .compare-sub {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    .compare-2col { grid-template-columns: 1fr; }
+  }
+
+  /* VISUAL COMPARISONS */
+  .vis-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+  }
+
+  .vis-tag {
+    display: inline-block;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+  }
+
+  .orange-tag { background: var(--orange-light); color: var(--orange); }
+  .blue-tag { background: var(--blue-light); color: var(--blue); }
+
+  .vis-note {
+    font-size: 0.92rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .vis-row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .vis-side-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+
+  .vis-side-label.align-right { align-items: flex-end; }
+
+  .vis-big-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .vis-big-num.orange { color: var(--orange); }
+  .vis-big-num.blue { color: var(--blue); }
+
+  .vis-sub {
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .vis-bars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .vis-bar-track {
+    height: 18px;
+    background: #F0EDE8;
+    border-radius: 9px;
+    overflow: hidden;
+  }
+
+  .vis-bar-fill {
+    height: 100%;
+    border-radius: 9px;
+  }
+
+  .orange-fill { background: var(--orange); }
+  .blue-fill { background: var(--blue); }
+
+  /* Document icons */
+  .icon-compare {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .icon-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .icon-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .doc-icon {
+    width: 32px;
+    height: 39px;
+  }
+
+  .doc-icon path:first-child {
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .doc-icon .fold {
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .doc-icon line {
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+
+  .orange-icon path:first-child, .orange-icon .fold { stroke: var(--orange); }
+  .orange-icon line { stroke: var(--orange); opacity: 0.5; }
+
+  .blue-icon path:first-child, .blue-icon .fold { stroke: var(--blue); }
+  .blue-icon line { stroke: var(--blue); opacity: 0.5; }
+
+  .icon-count {
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+
+  .icon-count.orange { color: var(--orange); }
+  .icon-count.blue { color: var(--blue); }
+
+  .icon-divider {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--border);
+    padding-top: 2rem;
+    flex-shrink: 0;
+  }
+
+  /* Timeline bars */
+  .cal-compare {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .cal-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cal-track {
+    width: 100%;
+    height: 36px;
+    background: #F0EDE8;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 0.4rem;
+  }
+
+  .cal-segment {
+    height: 100%;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 0.9rem;
+  }
+
+  .orange-seg { background: var(--orange); }
+  .blue-seg { background: var(--blue); }
+
+  .cal-label {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+  }
+
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .proposal-grid { grid-template-columns: 1fr; }
+    .hours-callout { grid-template-columns: 1fr; }
+    section { padding: 60px 1.25rem; }
+  }
+  /* ACCORDION */
+  .accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .ac-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .ac-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    background: white;
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .ac-header:hover { background: var(--warm-white); }
+
+  .ac-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .ac-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--orange);
+    min-width: 1.75rem;
+  }
+
+  .ac-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  .ac-chevron {
+    font-size: 0.92rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .ac-chevron.open { transform: rotate(180deg); }
+
+  .ac-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--border);
+    background: #FAFAF8;
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .ac-body p { padding-top: 1rem; }
+
+  .ac-body.open { display: block; }
+
+  .ac-vis-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .ac-vis-heading {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  /* SIGN OFF */
+  .sign-off {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 2rem 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .sign-off-main {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    font-style: normal;
+    color: var(--ink);
+    line-height: 1.7;
+    max-width: 680px;
+  }
+
+  .sign-off-name {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 0.25rem;
+  }
+
+  .sign-off-future {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+
+  /* PRODUCT GALLERY */
+  .gallery-showcase {
+    margin-top: 3rem;
+    background: var(--gold-light);
+    border-radius: 14px;
+    padding: 2.5rem 2rem 2.75rem;
+  }
+
+  .gallery-showcase-eyebrow {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .gallery-showcase-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.65rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .gallery-showcase-sub {
+    font-size: 0.98rem;
+    color: var(--muted);
+    text-align: center;
+    max-width: 540px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .gallery-box-hero {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .gallery-box-hero img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    display: block;
+  }
+  .product-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .gallery-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    display: block;
+  }
+
+  .gallery-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-align: center;
+  }
+
+
+  /* COURSE CAROUSEL */
+  .course-carousel {
+    margin-top: 2rem;
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+    border-radius: 14px;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.35s ease;
+    will-change: transform;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    padding: 0.25rem;
+  }
+
+.carousel-slide-inner {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem;
+  min-height: 520px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.carousel-slide .gallery-box-hero {
+  margin: 0 auto;
+  width: min(100%, 620px);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.carousel-slide .gallery-box-hero .gallery-role-desc {
+  font-size: 0.95rem;
+  color: var(--muted);
+  display: block;
+  margin-top: 0.2rem;
+  text-align: center;
+  line-height: 1.55;
+}
+
+.carousel-slide .gallery-box-hero img {
+  width: 100%;
+  max-width: 600px;
+  max-height: 420px;
+  object-fit: contain;
+  object-position: center;
+  aspect-ratio: auto;
+  margin-top: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  display: block;
+}
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .carousel-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--ink);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .carousel-btn:hover {
+    background: var(--warm-white);
+    transform: translateY(-1px);
+  }
+
+  .carousel-status {
+    min-width: 54px;
+    text-align: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+
+  .carousel-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: 0;
+    background: #D8CDBF;
+    cursor: pointer;
+    transition: width 0.2s ease, background 0.2s ease;
+  }
+
+  .carousel-dot.active {
+    width: 26px;
+    background: var(--gold);
+  }
+
+  @media (max-width: 640px) {
+    .carousel-slide-inner {
+      min-height: auto;
+      padding: 1.15rem;
+    }
+
+
+    .carousel-slide .gallery-item img {
+      max-height: 320px;
+    }
+  }
+
+
+  /* VIMEO */
+  .vimeo-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .vimeo-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .product-gallery { grid-template-columns: repeat(2, 1fr); }
+    .gallery-showcase { padding: 2rem 1.25rem 2.25rem; }
+    .gallery-showcase-heading { font-size: 1.4rem; }
+  }
+
+  /* BONUS ACCORDION */
+  .bonus-ac {
+    margin-top: 0.5rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px dashed var(--blue);
+    background: var(--blue-light);
+  }
+
+  .bonus-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--blue);
+    text-align: left;
+    transition: background 0.15s;
+  }
+
+  .bonus-trigger:hover { background: rgba(53,124,192,0.08); }
+
+  .bonus-trigger-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .bonus-star { font-size: 1.2rem; }
+
+  .bonus-trigger-text { color: var(--blue); }
+
+  .bonus-chevron {
+    font-size: 0.65rem;
+    color: var(--blue);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+
+  .bonus-chevron.open { transform: rotate(180deg); }
+
+  .bonus-body {
+    display: none;
+    border-top: 1px dashed var(--blue);
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .bonus-body.open { display: block; }
+
+  .bonus-table td {
+    background: white !important;
+    font-size: 0.92rem;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0 !important;
+  }
+
+  .bonus-table tr:last-child td { border-bottom: none; }
+
+
+  /* PRODUCT SECTION — redesign */
+  .diff-intro {
+    margin-bottom: 2rem;
+  }
+  .diff-intro > p {
+    font-size: 1.05rem;
+    color: var(--ink);
+    max-width: 680px;
+    margin-bottom: 1.5rem;
+    line-height: 1.65;
+  }
+  .barrier-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  @media (max-width: 640px) {
+    .barrier-grid { grid-template-columns: 1fr; }
+  }
+  .barrier-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+  .barrier-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .barrier-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--orange);
+    margin-bottom: 0.4rem;
+  }
+  .barrier-desc {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .philosophy-banner {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 10px 10px 0;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 2.5rem;
+  }
+  .philosophy-banner .phil-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .philosophy-banner p {
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .comp-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.25rem;
+  }
+  @media (max-width: 640px) {
+    .comp-hero { grid-template-columns: 1fr; }
+  }
+  .comp-hero-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+  .comp-role-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange);
+    background: var(--orange-light);
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    margin-bottom: 0.6rem;
+  }
+  .comp-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.55rem;
+    line-height: 1.2;
+  }
+  .comp-desc {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .gallery-item .comp-role-mini {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--blue);
+    display: block;
+    margin-top: 0.5rem;
+  }
+  .gallery-item .gallery-label {
+    display: block;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 0.2rem;
+  }
+  .gallery-item .gallery-role-desc {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.45;
+    margin-top: 0.2rem;
+    display: block;
+  }
+  .gallery-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .gallery-item img {
+    border-radius: 8px;
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+  }
+  .gallery-box-hero .comp-role-mini {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-top: 0.75rem;
+  }
+  .gallery-box-hero .gallery-label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-top: 0.2rem;
+  }
+
+
+.carousel-slide img {
+  width: 100%;
+  display: block;
+  border: 1px solid #ccc;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+.gallery-item {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+
+.carousel-slide .gallery-role-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.carousel-slide img.white-book {
+  border: 1px solid #ccc;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav>
+<span class="nav-logo">Sharing WILJ Course</span>
+<ul class="nav-links">
+<li><a href="#process">The Process</a></li>
+<li><a href="#product">The Product</a></li>
+</ul>
+</nav>
+<!-- HERO -->
+<div class="hero">
+<div class="hero-tag">Project Summary</div>
+<h1>Sharing WILJ Course<br/><em>Project Summary</em></h1>
+<p class="hero-sub">Why I Love Jesus: Sharing My Faith Story is a global ministry whose mission is to equip
+ordinary Christians of all ages to confidently share their faith stories. <br/> This course is the next
+step in carrying out that mission.</p>
+<div class="meta-row">
+<div class="meta-item">
+<span class="meta-label">Client</span>
+<span class="meta-value">Nancy Carol Willis / Why I Love Jesus</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Designer</span>
+<span class="meta-value">Rachelle Ebanks, Ebanks Educational Consulting LLC</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Timeline</span>
+<span class="meta-value">November 2025 to April 2026</span>
+</div>
+</div>
+</div>
+<div class="divider"></div>
+<!-- PART 2: PROCESS -->
+<section id="process">
+<div class="section-marker blue-border">
+<div>
+<div class="section-sub">Part One</div>
+<h2 class="section-title">The Process</h2>
+</div>
+</div>
+<div class="vimeo-wrap">
+<iframe allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" frameborder="0" src="https://player.vimeo.com/video/1187453393" title="Sharing WILJ Course Journey"></iframe>
+</div>
+<div class="timeline">
+<div class="timeline-track">
+<div class="tl-node">
+<div class="tl-dot n1">1</div>
+<div class="tl-date">Nov.<br/>2025</div>
+<div class="tl-summary">Kickoff</div>
+</div>
+<div class="tl-node">
+<div class="tl-dot n2">2</div>
+<div class="tl-date">Dec. 25<br/>Jan. 26</div>
+<div class="tl-summary">Development</div>
+</div>
+<div class="tl-node">
+<div class="tl-dot n3">3</div>
+<div class="tl-date">Feb.<br/>Mar. 26</div>
+<div class="tl-summary">Pilot Testing</div>
+</div>
+<div class="tl-node">
+<div class="tl-dot n4">4</div>
+<div class="tl-date">Mar.<br/>2026</div>
+<div class="tl-summary">Design &amp; Brand</div>
+</div>
+<div class="tl-node">
+<div class="tl-dot n5">5</div>
+<div class="tl-date">Apr.<br/>2026</div>
+<div class="tl-summary">Final Delivery</div>
+</div>
+</div>
+<div class="timeline-cards">
+<div class="tl-card">
+<div class="tl-card-dot n1">1</div>
+<div class="tl-card-body">
+<div class="tl-card-title">Kickoff</div>
+<div class="tl-card-date">Nov. 2025</div>
+<div class="tl-card-desc">Agreement signed, kickoff complete, development began</div>
+</div>
+</div>
+<div class="tl-card">
+<div class="tl-card-dot n2">2</div>
+<div class="tl-card-body">
+<div class="tl-card-title">Development</div>
+<div class="tl-card-date">Dec. 2025 to Jan. 2026</div>
+<div class="tl-card-desc">Facilitator guide drafts and course structure developed through agile sprints</div>
+</div>
+</div>
+<div class="tl-card">
+<div class="tl-card-dot n3">3</div>
+<div class="tl-card-body">
+<div class="tl-card-title">Pilot Testing</div>
+<div class="tl-card-date">Feb. to Mar. 2026</div>
+<div class="tl-card-desc">Lifehouse workshop tested the course in real settings with real participants</div>
+</div>
+</div>
+<div class="tl-card">
+<div class="tl-card-dot n4">4</div>
+<div class="tl-card-body">
+<div class="tl-card-title">Design &amp; Brand</div>
+<div class="tl-card-date">Mar. 2026</div>
+<div class="tl-card-desc">Design brief, style guide, video plan, and production direction finalized</div>
+</div>
+</div>
+<div class="tl-card">
+<div class="tl-card-dot n5">5</div>
+<div class="tl-card-body">
+<div class="tl-card-title">Final Delivery</div>
+<div class="tl-card-date">Apr. 2026</div>
+<div class="tl-card-desc">Final design, layout, video editing, print prep, and materials delivery</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<!-- PART 3: PRODUCT -->
+<section id="product">
+<div class="section-marker gold-border">
+<div>
+<div class="section-sub">Part Two</div>
+<h2 class="section-title">The Product</h2>
+</div>
+</div>
+<!-- What Makes This Different -->
+<div class="diff-intro">
+<p>Sharing Why I Love Jesus: Your Faith Sharing Course is an eight-session, small group course designed to help Christians write and share their personal faith story. It is highly interactive, action-oriented, and focused on practical application. </p>
+</div>
+<!-- Product Gallery -->
+<div class="gallery-showcase">
+<div class="gallery-showcase-eyebrow">The Curriculum System</div>
+<h3 class="gallery-showcase-heading">Sharing Why I Love Jesus: Your Faith Sharing Course</h3>
+<p class="gallery-showcase-sub">Multiple Components. One Integrated System.</p>
+<div class="divider"></div>
+<div class="course-carousel" data-carousel="">
+<div class="carousel-viewport">
+<div class="carousel-track">
+<article aria-hidden="false" class="carousel-slide active">
+<div class="carousel-slide-inner">
+<div class="gallery-box-hero">
+<span class="comp-role-mini">Frictionless Deployment</span>
+<h4 class="comp-name">Curriculum Kit</h4>
+<span class="gallery-role-desc">The curriculum kit is a physical package that contains the leader guide, participant workbooks, the faith sharing chart, completion certificates, and access to the online intro videos.</span>
+<img alt="Mailer box mockup on table" src="images/curriculum-kit.jpg"/>
+</div>
+</div>
+</article>
+<article aria-hidden="true" class="carousel-slide">
+<div class="carousel-slide-inner">
+<div class="gallery-box-hero">
+<span class="comp-role-mini">Tone Setting</span>
+<h4 class="comp-name">Session Intro Videos</h4>
+<span class="gallery-role-desc">The intro videos are short videos to set the tone and focus for each session. The course creators, Rachelle Ebanks and Nancy Carol Willis, encourage and direct participants at the start of each session with personal stories and Biblical truths.</span>
+<img alt="Session intro video on laptop" src="images/intro-videos.png"/>
+</div>
+</div>
+</article>
+<article aria-hidden="true" class="carousel-slide">
+<div class="carousel-slide-inner">
+<div class="gallery-box-hero">
+<span class="comp-role-mini">Enables Facilitation</span>
+<h4 class="comp-name">Leader Guide</h4>
+<span class="gallery-role-desc">The leader guide provides an activity outline of each session along with timing recommendations, discussion cues, and facilitation support. The guide is written in everyday language, so that all leaders can feel confident running the course.</span>
+<img alt="Leader Guide cover" src="images/leader-guide.jpg"/>
+</div>
+</div>
+</article>
+<article aria-hidden="true" class="carousel-slide">
+<div class="carousel-slide-inner">
+<div class="gallery-box-hero">
+<span class="comp-role-mini">Provides Practices</span>
+<h4 class="comp-name">Participant Workbook</h4>
+<span class="gallery-role-desc">The participant workbook is where participants complete most of their in-session activities. Some of the workbook activities include role-playing scenarios, while others provide prompts for writing and refining your faith story. There is a wide variety of activities in the workbook, but they are all focused on one thing: helping Christians share their faith confidently.</span>
+<img alt="Participant Workbook cover" src="images/participant-workbook.png" class="white-book"/>
+</div>
+</div>
+</article>
+<article aria-hidden="true" class="carousel-slide">
+<div class="carousel-slide-inner">
+<div class="gallery-box-hero">
+<span class="comp-role-mini">Promotes Action</span>
+<h4 class="comp-name">Faith Sharing Chart</h4>
+<span class="gallery-role-desc">The faith sharing chart is an 18x24" poster displayed throughout the course. At the end of the second session, the participants set a goal for how many faith sharing conversations they aim to have by the end of the course. The poster is meant to encourage and remind participants that the goal is for them to share their faith outside of the sessions.</span>
+<img alt="Faith Sharing Chart poster" src="images/faith-sharing-chart.jpg"/>
+</div>
+</div>
+</article>
+<article aria-hidden="true" class="carousel-slide">
+<div class="carousel-slide-inner">
+<div class="gallery-box-hero">
+<span class="comp-role-mini">Deepens Learning</span>
+<h4 class="comp-name">Study Guide</h4>
+<span class="gallery-role-desc">Sharing Why I Love Jesus, by Nancy Carol Willis, is the Biblical and devotional foundation of the course. Participants are assigned readings from the study guide most weeks and these readings prepare them for their in-session activities and discussions.</span>
+<img alt="Study Guide" src="images/certificates.jpg"/>
+</div>
+</div>
+</article>
+</div>
+</div>
+<div class="carousel-controls">
+<button aria-label="Previous slide" class="carousel-btn" data-carousel-prev="" type="button">‹</button>
+<div aria-live="polite" class="carousel-status">
+<span data-carousel-current="">1</span> / <span>6</span>
+</div>
+<button aria-label="Next slide" class="carousel-btn" data-carousel-next="" type="button">›</button>
+</div>
+<div aria-label="Carousel slide navigation" class="carousel-dots">
+<button aria-label="Show Curriculum Kit" class="carousel-dot active" data-carousel-dot="0" type="button"></button>
+<button aria-label="Show Intro Videos" class="carousel-dot" data-carousel-dot="1" type="button"></button>
+<button aria-label="Show Leader Guide" class="carousel-dot" data-carousel-dot="2" type="button"></button>
+<button aria-label="Show Participant Workbook" class="carousel-dot" data-carousel-dot="3" type="button"></button>
+<button aria-label="Show Faith Sharing Chart" class="carousel-dot" data-carousel-dot="4" type="button"></button>
+<button aria-label="Show Study Guide" class="carousel-dot" data-carousel-dot="5" type="button"></button>
+</div>
+<!-- Bonus accordion -->
+<div class="bonus-ac" id="bonusAc">
+<button aria-expanded="false" class="bonus-trigger" onclick="toggleBonus()">
+<span class="bonus-trigger-left">
+<span class="bonus-trigger-text"><strong>Bonus deliverables</strong> beyond original scope</span>
+</span>
+<span class="bonus-chevron">▼</span>
+</button>
+<div class="bonus-body" id="bonusBody">
+<table class="scope-table bonus-table">
+<tbody>
+<tr>
+<td><strong>Completion Certificates</strong><br/>Added to strengthen the commissioning experience and encourage participants as ambassadors.</td>
+</tr>
+<tr>
+<td><strong>Video Thumbnails (×8)</strong><br/>Consistent session branding for an elevated YouTube playlist presentation.</td>
+</tr>
+<tr>
+<td><strong>Fulfillment Directions</strong><br/>Supports packing, distribution, and consistent kit assembly.</td>
+</tr>
+<tr>
+<td><strong>Vendor &amp; Production Specifications</strong><br/>Print and production specs to support future reprints and vendor coordination.</td>
+</tr>
+<tr>
+<td><strong>Lifehouse Workshop Materials</strong><br/>Supplemental materials used in real-world testing and implementation at Lifehouse.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<div class="divider"></div>
+<!-- SIGN OFF -->
+<div class="sign-off">
+<p class="sign-off-main">My hope is that this course helps Christians across the US start to confidently share their faith in Jesus. Truly there is no better outcome than that.</p>
+<p class="sign-off-name">Rachelle Ebanks</p>
+</div>
+<!-- FOOTER -->
+<footer>
+<span>Ebanks Educational Consulting LLC, April 2026</span>
+<span>Sharing Why I Love Jesus: Your Faith Sharing Course</span>
+</footer>
+<script>
+  function toggleBonus() {
+    const body = document.getElementById('bonusBody');
+    const btn  = document.querySelector('.bonus-trigger');
+    const chev = document.querySelector('.bonus-chevron');
+    const open = body.classList.toggle('open');
+    chev.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+  }
+
+  function toggleAc(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.ac-chevron');
+    body.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+
+  function toggleStatus(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.status-chevron');
+    body.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+
+  // Timeline animation on scroll
+  const timelineItems = document.querySelectorAll('.tl-node, .tl-card');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const all = Array.from(timelineItems);
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 60 * all.indexOf(entry.target));
+      }
+    });
+  }, { threshold: 0.1 });
+
+  timelineItems.forEach(item => observer.observe(item));
+
+  // Nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if (top < 80) current = section.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+      link.style.background = '';
+      link.style.color = '';
+      if (link.getAttribute('href') === '#' + current) {
+        link.style.background = 'var(--orange-light)';
+        link.style.color = 'var(--orange)';
+      }
+    });
+  });
+
+  function initCourseCarousel() {
+    document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+      const track = carousel.querySelector('.carousel-track');
+      const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+      const prev = carousel.querySelector('[data-carousel-prev]');
+      const next = carousel.querySelector('[data-carousel-next]');
+      const current = carousel.querySelector('[data-carousel-current]');
+      const dots = Array.from(carousel.querySelectorAll('[data-carousel-dot]'));
+      let index = 0;
+
+      function showSlide(nextIndex) {
+        index = (nextIndex + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        current.textContent = index + 1;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+          slide.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      }
+
+      prev.addEventListener('click', () => showSlide(index - 1));
+      next.addEventListener('click', () => showSlide(index + 1));
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => showSlide(Number(dot.dataset.carouselDot)));
+      });
+
+      carousel.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') showSlide(index - 1);
+        if (event.key === 'ArrowRight') showSlide(index + 1);
+      });
+
+      showSlide(0);
+    });
+  }
+
+  initCourseCarousel();
+
+
+</script>
+</body>
+</html>
