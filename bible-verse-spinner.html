@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Verse Spinner</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at top, #1a2a4a 0%, #0d1520 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Georgia', serif;
+    color: white;
+    padding: 24px 16px 40px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    color: #f5d87a;
+    text-shadow: 0 0 20px rgba(245, 216, 122, 0.4);
+  }
+
+  header p {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    font-style: italic;
+  }
+
+  .wheel-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Pointer: downward triangle above the wheel, centered */
+  .pointer {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 26px solid #f5d87a;
+    filter: drop-shadow(0 2px 6px rgba(245,216,122,0.6));
+    z-index: 10;
+  }
+
+  canvas {
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6), 0 0 80px rgba(245,216,122,0.1);
+    display: block;
+  }
+
+  #spinBtn {
+    margin-top: 32px;
+    padding: 16px 60px;
+    font-size: 1.2rem;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #c9a227 0%, #f5d87a 50%, #c9a227 100%);
+    color: #1a1a1a;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(201,162,39,0.5);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  #spinBtn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(201,162,39,0.6); }
+  #spinBtn:active { transform: translateY(0); }
+  #spinBtn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal-card {
+    background: linear-gradient(160deg, #1e3058 0%, #0f1e38 100%);
+    border: 1px solid rgba(245,216,122,0.35);
+    border-radius: 20px;
+    padding: 40px 36px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(245,216,122,0.08);
+    animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .modal-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .verse-ref {
+    font-size: 1.3rem;
+    color: #f5d87a;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .verse-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #f5d87a, transparent);
+    margin: 0 auto 20px;
+  }
+
+  .verse-text {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.92);
+    font-style: italic;
+    margin-bottom: 28px;
+  }
+
+  .verse-translation {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.35);
+    font-family: sans-serif;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+  }
+
+  .modal-btn {
+    padding: 13px 48px;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #c9a227, #f5d87a);
+    color: #1a1a1a;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(201,162,39,0.45);
+    transition: transform 0.1s;
+  }
+
+  .modal-btn:hover { transform: translateY(-2px); }
+
+  @media (max-width: 480px) {
+    header h1 { font-size: 1.5rem; }
+    .modal-card { padding: 28px 20px; }
+    .verse-text { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Bible Verse Spinner</h1>
+  <p>Spin the wheel and receive a word from Scripture</p>
+</header>
+
+<div class="wheel-wrap">
+  <div class="pointer"></div>
+  <canvas id="wheel" width="380" height="380"></canvas>
+</div>
+
+<button id="spinBtn" onclick="spin()">SPIN</button>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal-card">
+    <div class="modal-icon">✝</div>
+    <div class="verse-ref" id="verseRef"></div>
+    <div class="verse-divider"></div>
+    <div class="verse-text" id="verseText"></div>
+    <div class="verse-translation">New International Version (NIV)</div>
+    <button class="modal-btn" onclick="closeModal()">Spin Again</button>
+  </div>
+</div>
+
+<script>
+const verses = [
+  {
+    ref: "John 3:16",
+    short: "John 3:16",
+    text: "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."
+  },
+  {
+    ref: "Philippians 4:13",
+    short: "Phil 4:13",
+    text: "I can do all this through him who gives me strength."
+  },
+  {
+    ref: "Jeremiah 29:11",
+    short: "Jer 29:11",
+    text: "'For I know the plans I have for you,' declares the Lord, 'plans to prosper you and not to harm you, plans to give you hope and a future.'"
+  },
+  {
+    ref: "Romans 8:28",
+    short: "Rom 8:28",
+    text: "And we know that in all things God works for the good of those who love him, who have been called according to his purpose."
+  },
+  {
+    ref: "Psalm 23:1",
+    short: "Ps 23:1",
+    text: "The Lord is my shepherd, I lack nothing."
+  },
+  {
+    ref: "Proverbs 3:5-6",
+    short: "Prov 3:5-6",
+    text: "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight."
+  },
+  {
+    ref: "Isaiah 40:31",
+    short: "Isa 40:31",
+    text: "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint."
+  },
+  {
+    ref: "Matthew 11:28",
+    short: "Matt 11:28",
+    text: "Come to me, all you who are weary and burdened, and I will give you rest."
+  },
+  {
+    ref: "Psalm 46:10",
+    short: "Ps 46:10",
+    text: "He says, 'Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.'"
+  },
+  {
+    ref: "Joshua 1:9",
+    short: "Josh 1:9",
+    text: "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go."
+  },
+  {
+    ref: "Galatians 5:22-23",
+    short: "Gal 5:22-23",
+    text: "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control."
+  },
+  {
+    ref: "Romans 8:38-39",
+    short: "Rom 8:38-39",
+    text: "For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord."
+  }
+];
+
+const colors = [
+  '#c0392b', '#d35400', '#c9a227', '#27ae60',
+  '#16a085', '#2980b9', '#8e44ad', '#c0392b',
+  '#1a6b3a', '#1a5276', '#6c3483', '#922b21'
+];
+
+// Slightly different set so adjacent sectors contrast well
+const sectorColors = [
+  '#c0392b', '#2980b9', '#c9a227', '#27ae60',
+  '#8e44ad', '#d35400', '#16a085', '#922b21',
+  '#1a5276', '#1a6b3a', '#c9a227', '#6c3483'
+];
+
+const canvas = document.getElementById('wheel');
+const ctx = canvas.getContext('2d');
+const NUM = verses.length; // 12
+const SECTOR = (2 * Math.PI) / NUM;
+
+let currentAngle = 0;
+let spinning = false;
+
+function drawWheel(angle) {
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const r = cx - 6;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Outer ring shadow
+  ctx.save();
+  ctx.shadowColor = 'rgba(0,0,0,0.5)';
+  ctx.shadowBlur = 15;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r + 4, 0, 2 * Math.PI);
+  ctx.fillStyle = '#0a1628';
+  ctx.fill();
+  ctx.restore();
+
+  for (let i = 0; i < NUM; i++) {
+    const start = angle + i * SECTOR;
+    const end = start + SECTOR;
+    const mid = start + SECTOR / 2;
+
+    // Sector fill
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, start, end);
+    ctx.closePath();
+    ctx.fillStyle = sectorColors[i];
+    ctx.fill();
+
+    // Sector border
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Text — rotated to radiate outward
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(mid);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(255,255,255,0.95)';
+    ctx.font = 'bold 11.5px sans-serif';
+    ctx.shadowColor = 'rgba(0,0,0,0.6)';
+    ctx.shadowBlur = 4;
+    ctx.fillText(verses[i].short, r - 12, 4);
+    ctx.restore();
+  }
+
+  // Outer ring border
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+  ctx.strokeStyle = 'rgba(245,216,122,0.5)';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Center hub
+  const hubR = 22;
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, hubR);
+  grad.addColorStop(0, '#f5d87a');
+  grad.addColorStop(1, '#c9a227');
+  ctx.beginPath();
+  ctx.arc(cx, cy, hubR, 0, 2 * Math.PI);
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+function easeOut(t) {
+  return 1 - Math.pow(1 - t, 4);
+}
+
+function spin() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById('spinBtn').disabled = true;
+
+  const extraSpins = 5 + Math.random() * 4; // 5-9 full rotations
+  const extraAngle = Math.random() * 2 * Math.PI;
+  const totalDelta = extraSpins * 2 * Math.PI + extraAngle;
+  const duration = 4000 + Math.random() * 1500;
+  const startAngle = currentAngle;
+  const startTime = performance.now();
+
+  function animate(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(elapsed / duration, 1);
+    currentAngle = startAngle + totalDelta * easeOut(t);
+    drawWheel(currentAngle);
+
+    if (t < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      spinning = false;
+      showResult();
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+function getWinningSector() {
+  // Pointer is at the top (angle = -π/2 = 3π/2 in canvas coords, i.e. 270°)
+  // Canvas 0° = right, goes clockwise. Top = -π/2 = 3π/2
+  const pointerAngle = -Math.PI / 2;
+  const norm = ((pointerAngle - currentAngle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+  return Math.floor(norm / SECTOR) % NUM;
+}
+
+function showResult() {
+  const i = getWinningSector();
+  document.getElementById('verseRef').textContent = verses[i].ref;
+  document.getElementById('verseText').textContent = '"' + verses[i].text + '"';
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.getElementById('spinBtn').disabled = false;
+}
+
+// Draw initial wheel
+drawWheel(currentAngle);
+</script>
+</body>
+</html>
