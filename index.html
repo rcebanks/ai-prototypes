@@ -102,6 +102,23 @@
     max-width: 500px;
   }
 
+  .project-cta {
+    grid-column: 1;
+    grid-row: 3;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.18s, transform 0.18s;
+  }
+
+  .project:hover .project-cta {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
   .project-type {
     grid-column: 2;
     grid-row: 1;
@@ -135,35 +152,40 @@
       <div class="project-name">Christian Life Profile Assessment</div>
       <div class="project-type">Assessment</div>
       <div class="project-desc">Randy Frazee's 120-question discipleship tool. Measures where you stand across beliefs, practices, and virtues — then shows you the full picture.</div>
+      <div class="project-cta">Take the assessment →</div>
     </a>
 
     <a class="project" href="/bible-verse-spinner.html">
       <div class="project-name">Bible Verse Spinner</div>
       <div class="project-type">Interactive</div>
       <div class="project-desc">A spinning wheel with 12 Bible verses. Hit spin, see where it lands, read the scripture. Simple and kind of satisfying.</div>
+      <div class="project-cta">Spin the wheel →</div>
     </a>
 
     <a class="project" href="/bible-verse-rotator.html">
       <div class="project-name">Bible Verse Rotator</div>
       <div class="project-type">Daily Tool</div>
       <div class="project-desc">Pulls a real verse from the NET Bible API and rotates to a new one every 10 minutes. Over 100 references in the pool.</div>
+      <div class="project-cta">Read today's verse →</div>
     </a>
 
     <a class="project" href="/sharingwilj/">
       <div class="project-name">Sharing WILJ Course Summary</div>
       <div class="project-type">Resource</div>
       <div class="project-desc">Offboarding page for the Sharing WILJ course — materials, next steps, and resources all in one place.</div>
+      <div class="project-cta">View the resources →</div>
     </a>
 
     <a class="project" href="/moveitmay/">
       <div class="project-name">Move It May</div>
       <div class="project-type">App</div>
       <div class="project-desc">A 20-day movement challenge. Log your workouts, see what others are doing, react with an emoji. Built on Firebase.</div>
+      <div class="project-cta">Join the challenge →</div>
     </a>
 
   </section>
 
-  <footer>Rachelle Banks</footer>
+  <footer>Rachelle Ebanks</footer>
 
 </div>
 </body>
