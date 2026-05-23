@@ -1,21 +1,232 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>AI Prototypes</title>
-  <style>
-    body { font-family: Georgia, serif; max-width: 600px; margin: 60px auto; padding: 0 20px; }
-    h1 { font-size: 1.6rem; }
-    a { color: #2c5f8a; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachelle's AI Prototypes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f8f4ef;
+    --ink: #1c1c1c;
+    --muted: #6b6b6b;
+    --border: #e8e0d4;
+    --blue: #2c5f8a;
+    --blue-light: #e8f0f8;
+    --gold: #c9a227;
+    --card: #ffffff;
+    --radius: 14px;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #1a3d5c 0%, #2c5f8a 100%);
+    color: white;
+    padding: 60px 24px 52px;
+    text-align: center;
+  }
+
+  .header-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 14px;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  header p {
+    font-size: 1rem;
+    opacity: 0.75;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .header-divider {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin: 24px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ── MAIN GRID ── */
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 52px 24px 80px;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 26px 24px;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.1);
+    border-color: var(--blue);
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-light);
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2px;
+  }
+
+  .card p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .card-arrow {
+    font-size: 0.8rem;
+    color: var(--blue);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.15s;
+  }
+
+  .card:hover .card-arrow { gap: 9px; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+</style>
 </head>
 <body>
-  <h1>Rachelle's AI Prototypes</h1>
-  <ul>
-    <li><a href="/christian-life-profile.html">The Christian Life Profile Assessment</a> — Randy Frazee, 2000 Edition</li>
-    <li><a href="/bible-verse-spinner.html">Bible Verse Spinner</a> — Spin the wheel for a scripture</li>
-    <li><a href="/bible-verse-rotator.html">Bible Verse Rotator</a> — Auto-rotating verse from the NET Bible, changes every 10 minutes</li>
-    <li><a href="/sharingwilj/">Sharing WILJ Course Summary</a> — Course offboarding page</li>
-    <li><a href="/moveitmay/">Move It May</a> — Workout tracker challenge app</li>
-  </ul>
+
+<header>
+  <p class="header-eyebrow">Built with AI</p>
+  <h1>Rachelle's Prototypes</h1>
+  <p>A growing collection of interactive tools, apps, and resources.</p>
+  <div class="header-divider"></div>
+</header>
+
+<main>
+  <p class="section-label">All Projects</p>
+  <div class="cards-grid">
+
+    <a class="card" href="/christian-life-profile.html">
+      <div class="card-icon">✝️</div>
+      <span class="card-tag">Assessment</span>
+      <h2>Christian Life Profile</h2>
+      <p>A 120-question discipleship assessment measuring beliefs, practices, and virtues across six dimensions. Based on Randy Frazee's 2000 edition.</p>
+      <div class="card-arrow">Take the assessment →</div>
+    </a>
+
+    <a class="card" href="/bible-verse-spinner.html">
+      <div class="card-icon">🎡</div>
+      <span class="card-tag">Interactive</span>
+      <h2>Bible Verse Spinner</h2>
+      <p>Spin a colorful wheel and receive a word from Scripture. A fun, visual way to land on a Bible verse.</p>
+      <div class="card-arrow">Spin the wheel →</div>
+    </a>
+
+    <a class="card" href="/bible-verse-rotator.html">
+      <div class="card-icon">📖</div>
+      <span class="card-tag">Daily Tool</span>
+      <h2>Bible Verse Rotator</h2>
+      <p>A fresh verse from the NET Bible every 10 minutes, drawn from over 100 references. Click to jump to the next one anytime.</p>
+      <div class="card-arrow">Read a verse →</div>
+    </a>
+
+    <a class="card" href="/sharingwilj/">
+      <div class="card-icon">📚</div>
+      <span class="card-tag">Resource</span>
+      <h2>Sharing WILJ Course Summary</h2>
+      <p>An offboarding and resource guide for the Sharing WILJ course, with curriculum materials and next steps.</p>
+      <div class="card-arrow">View resources →</div>
+    </a>
+
+    <a class="card" href="/moveitmay/">
+      <div class="card-icon">💪</div>
+      <span class="card-tag">Challenge</span>
+      <h2>Move It May</h2>
+      <p>A 20-day movement challenge tracker. Log workouts, react to others, and stay accountable throughout the month.</p>
+      <div class="card-arrow">Open app →</div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  Built by Rachelle &mdash; powered by AI
+</footer>
+
 </body>
 </html>
