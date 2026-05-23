@@ -72,31 +72,8 @@
     background: rgba(0,0,0,0.12);
   }
 
-  .controls {
-    margin-top: 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-
-  button {
-    background: rgba(0,0,0,0.15);
-    border: none;
-    color: inherit;
-    padding: 13px 32px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background 0.2s;
-    letter-spacing: 0.02em;
-  }
-
-  button:hover { background: rgba(0,0,0,0.25); }
-
   .timer {
+    margin-top: 28px;
     font-size: 0.7rem;
     opacity: 0.5;
     letter-spacing: 0.05em;
@@ -120,10 +97,7 @@
   <p class="card-label">NET Bible</p>
   <blockquote id="verseText" class="loading">"Loading verse…"</blockquote>
   <p class="reference" id="verseRef"></p>
-  <div class="controls">
-    <button onclick="showNext()">Another verse</button>
-    <p class="timer" id="timerLabel"></p>
-  </div>
+  <p class="timer" id="timerLabel"></p>
 </div>
 
 <script>
@@ -203,11 +177,6 @@ async function loadVerse(index) {
     el.textContent = 'Verse could not be loaded. Try another.';
     refEl.textContent = ref;
   }
-}
-
-function showNext() {
-  currentIndex = (currentIndex + 1) % references.length;
-  loadVerse(currentIndex);
 }
 
 function updateTimer() {
