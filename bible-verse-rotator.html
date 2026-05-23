@@ -152,7 +152,7 @@ async function fetchVerse(ref) {
   if (!res.ok) throw new Error('Failed to load');
   const data = await res.json();
   if (!Array.isArray(data) || !data.length) throw new Error('No data');
-  const text = data.map(v => v.text).join(' ');
+  const text = data.map(v => v.text).join(' ').replace(/<[^>]*>/g, '');
   cache[ref] = text;
   return text;
 }
