@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Christian Life Profile — Randy Frazee (2000 Edition)</title>
+<style>
+  :root {
+    --blue: #2c5f8a;
+    --blue-light: #3a7cbf;
+    --gold: #c9a227;
+    --gold-light: #e8c547;
+    --bg: #f4f1eb;
+    --card: #ffffff;
+    --text: #2a2a2a;
+    --muted: #6b6b6b;
+    --border: #ddd;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--blue) 0%, #1a3d5c 100%);
+    color: white;
+    padding: 24px 20px 20px;
+    text-align: center;
+  }
+
+  header h1 { font-size: 1.8rem; letter-spacing: 0.5px; }
+  header p { margin-top: 6px; opacity: 0.85; font-size: 0.95rem; font-style: italic; }
+
+  .progress-bar-wrap {
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    height: 8px;
+    margin: 14px auto 0;
+    max-width: 500px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    background: var(--gold-light);
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .progress-label {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.78rem;
+    margin-top: 6px;
+    font-family: sans-serif;
+  }
+
+  main { max-width: 780px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  /* PAGES */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* WELCOME */
+  .welcome-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .welcome-card h2 {
+    color: var(--blue);
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+  }
+
+  .welcome-card h3 {
+    color: var(--blue);
+    font-size: 1.1rem;
+    margin: 20px 0 8px;
+  }
+
+  .welcome-card p {
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 12px;
+  }
+
+  .welcome-card ol {
+    padding-left: 20px;
+    color: #444;
+    line-height: 1.8;
+  }
+
+  .scale-demo {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 12px 0;
+    font-family: sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .scale-demo .label {
+    font-style: italic;
+  }
+
+  /* QUESTIONS */
+  .section-header {
+    background: var(--blue);
+    color: white;
+    padding: 14px 20px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+  }
+
+  .section-sub {
+    background: var(--blue-light);
+    color: white;
+    padding: 8px 20px;
+    font-size: 0.85rem;
+    opacity: 0.92;
+  }
+
+  .questions-card {
+    background: var(--card);
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 8px 0 20px;
+  }
+
+  .question-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0ece4;
+    transition: background 0.15s;
+  }
+
+  .question-row:last-child { border-bottom: none; }
+  .question-row:hover { background: #faf8f4; }
+  .question-row.answered { background: #f6fbf4; }
+
+  .q-num {
+    font-weight: bold;
+    color: var(--blue);
+    font-size: 0.9rem;
+    min-width: 28px;
+    padding-top: 2px;
+    font-family: sans-serif;
+  }
+
+  .q-text {
+    flex: 1;
+    line-height: 1.55;
+    font-size: 0.97rem;
+  }
+
+  .q-scale {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .q-scale label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    gap: 4px;
+  }
+
+  .q-scale label span {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-family: sans-serif;
+  }
+
+  .q-scale input[type="radio"] {
+    display: none;
+  }
+
+  .radio-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.15s;
+    background: white;
+  }
+
+  .q-scale input[type="radio"]:checked + .radio-btn {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+    box-shadow: 0 2px 6px rgba(44,95,138,0.35);
+  }
+
+  .q-scale label:hover .radio-btn {
+    border-color: var(--blue-light);
+    color: var(--blue-light);
+  }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 2px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: sans-serif;
+    font-style: italic;
+  }
+
+  /* BUTTONS */
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Georgia', serif;
+    transition: all 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: white;
+    flex: 1;
+  }
+
+  .btn-primary:hover { background: var(--blue-light); }
+
+  .btn-secondary {
+    background: #e8e4dc;
+    color: var(--text);
+  }
+
+  .btn-secondary:hover { background: #d8d3c8; }
+
+  .btn-gold {
+    background: var(--gold);
+    color: white;
+    flex: 1;
+  }
+
+  .btn-gold:hover { background: var(--gold-light); color: #222; }
+
+  /* RESULTS */
+  .results-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 28px 28px;
+    margin-bottom: 20px;
+  }
+
+  .results-card h2 {
+    color: var(--blue);
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+  }
+
+  .results-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .big-totals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .big-total-box {
+    text-align: center;
+    padding: 20px;
+    border-radius: var(--radius);
+    border: 2px solid var(--blue);
+    background: linear-gradient(135deg, #f0f6ff 0%, #e8f0f8 100%);
+  }
+
+  .big-total-box .score-num {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: var(--blue);
+    line-height: 1;
+  }
+
+  .big-total-box .score-denom {
+    font-size: 1.1rem;
+    color: var(--muted);
+  }
+
+  .big-total-box .score-label {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: bold;
+  }
+
+  .category-section { margin-bottom: 32px; }
+
+  .category-section h3 {
+    color: var(--blue);
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--blue);
+  }
+
+  .subcategory { margin-top: 16px; }
+
+  .subcategory-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    font-family: sans-serif;
+    margin-bottom: 10px;
+  }
+
+  .competency-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .comp-name {
+    font-size: 0.88rem;
+    min-width: 190px;
+    color: var(--text);
+  }
+
+  .comp-bar-bg {
+    flex: 1;
+    height: 18px;
+    background: #eee;
+    border-radius: 9px;
+    overflow: hidden;
+  }
+
+  .comp-bar-fill {
+    height: 100%;
+    border-radius: 9px;
+    background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%);
+    transition: width 0.8s ease;
+    width: 0%;
+  }
+
+  .comp-score {
+    font-size: 0.82rem;
+    font-family: sans-serif;
+    color: var(--muted);
+    min-width: 38px;
+    text-align: right;
+  }
+
+  .subtotal-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 6px 0 14px;
+    padding: 8px 10px;
+    background: #f0f6ff;
+    border-radius: 6px;
+    border-left: 4px solid var(--blue);
+  }
+
+  .subtotal-label {
+    font-size: 0.85rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: var(--blue);
+    flex: 1;
+  }
+
+  .subtotal-bar-bg {
+    flex: 1;
+    height: 14px;
+    background: #dde7f5;
+    border-radius: 7px;
+    overflow: hidden;
+  }
+
+  .subtotal-bar-fill {
+    height: 100%;
+    border-radius: 7px;
+    background: linear-gradient(90deg, #1a3d5c 0%, var(--blue-light) 100%);
+    transition: width 0.8s ease;
+    width: 0%;
+  }
+
+  .subtotal-score {
+    font-size: 0.9rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: var(--blue);
+    min-width: 50px;
+    text-align: right;
+  }
+
+  .reflection-section {
+    background: linear-gradient(135deg, #fffdf5 0%, #fff8e7 100%);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+
+  .reflection-section h3 {
+    color: #8a6200;
+    margin-bottom: 8px;
+  }
+
+  .reflection-section p {
+    font-size: 0.9rem;
+    color: #5a4400;
+    line-height: 1.6;
+  }
+
+  .reflection-section textarea {
+    width: 100%;
+    min-height: 120px;
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid #e0c870;
+    border-radius: 6px;
+    font-family: 'Georgia', serif;
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.7);
+    resize: vertical;
+    color: var(--text);
+  }
+
+  .warning-msg {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: #856404;
+    font-family: sans-serif;
+    margin-top: 12px;
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.3rem; }
+    .welcome-card { padding: 24px 18px; }
+    .question-row { gap: 10px; padding: 14px 12px; }
+    .radio-btn { width: 28px; height: 28px; font-size: 0.75rem; }
+    .q-scale { gap: 2px; }
+    .big-totals { grid-template-columns: 1fr 1fr; }
+    .comp-name { min-width: 140px; font-size: 0.82rem; }
+    .results-card { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>The Christian Life Profile</h1>
+  <p>A discipleship tool to assess Christian Beliefs, Practices, and Virtues</p>
+  <p style="margin-top:4px; font-size:0.8rem; opacity:0.7; font-style:normal; letter-spacing:0.3px;">2000 Edition &mdash; by Randy Frazee</p>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">Step 1 of 13</div>
+</header>
+
+<main>
+
+<!-- PAGE 0: Welcome -->
+<div class="page active" id="page-0">
+  <div class="welcome-card">
+    <p style="font-size:0.82rem; color:var(--muted); margin-bottom:18px; font-family:sans-serif;">
+      <em>The Christian Life Profile</em>, 2000 Edition &mdash; created by <strong>Randy Frazee</strong>.
+      All content and assessment questions are the intellectual property of Randy Frazee.
+    </p>
+    <h2>Getting Started</h2>
+    <h3>Start With Prayer</h3>
+    <p>Life change is an impossible task without God working in our lives. Fortunately, the scripture presents life transformation as a foregone conclusion in the scope of God's desire for us.</p>
+    <p>Begin this assessment by presenting yourself humbly dependant upon Him. Ask God to help you see your life clearly as you respond to each statement.</p>
+    <h3>Assessing Your Life</h3>
+    <p>The following <strong>120 statements</strong> relate to the core beliefs, practices, and virtues of the developing disciple. Read each statement and assess your personal Christian experience on a scale of <strong>0 to 5</strong>:</p>
+    <div class="scale-demo">
+      <span class="label">Does not apply at all</span>
+      <span>→</span>
+      <span style="font-weight:bold; color: var(--blue);">0 &nbsp; 1 &nbsp; 2 &nbsp; 3 &nbsp; 4 &nbsp; 5</span>
+      <span>→</span>
+      <span class="label">Applies completely</span>
+    </div>
+    <h3>What You'll Receive</h3>
+    <p>After completing all 120 statements, you'll receive a detailed profile showing your scores across six dimensions — <em>Beliefs, Practices, and Virtues</em> for both <em>Love God</em> and <em>Love Neighbor</em> — along with a visual bar graph of each area.</p>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="goToPage(1)">Begin the Assessment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Question pages will be injected here -->
+
+<!-- RESULTS page will be injected as page-13 -->
+
+</main>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+const questions = [
+  // 1-10
+  "I believe that the God of the Bible is the only true God.",
+  "I believe that I will inherit eternal life because of what Jesus has done for me.",
+  "I believe the Bible is absolutely true in matters of faith and morals.",
+  "I believe that God has a purpose for my life.",
+  "I believe God loves me and therefore my life has value.",
+  "I thank God daily for who He is and what He is doing in my life.",
+  "I seek God's will through prayer.",
+  "I desire Jesus Christ to be first in my life.",
+  "I read the Bible daily.",
+  "I exist to know, love, and serve God.",
+  // 11-20
+  "I have inner contentment even when things go wrong.",
+  "I know God has forgiven me because of what Jesus has done.",
+  "I take unpopular stands when my faith dictates.",
+  "I am not addicted to any substance — whether food, caffeine, alcohol, or chemical.",
+  "As a child of God, I do not think too highly or too lowly of myself.",
+  "I believe God gives spiritual gifts to every Christian for service to the church and the community.",
+  "I believe that each person possesses a sinful nature and is in need of God's forgiveness.",
+  "God calls me to be involved in the lives of the poor and suffering.",
+  "I believe it is important to share the Gospel with my neighbor because Christ has commanded me to do so.",
+  "I believe that everything I am, or own, comes from God and belongs to God.",
+  // 21-30
+  "I have close relationships with other Christians who have influence in the direction of my life.",
+  "I invest my time in others by praying for them.",
+  "I give away 10% or more of my income to God's work in the world.",
+  "I frequently share my faith with people who are not Christians.",
+  "I am living out God's purpose for my life.",
+  "God's grace enables me to forgive people who have hurt me.",
+  "I do not get angry with God when I have to endure suffering.",
+  "I follow the Ten Commandments.",
+  "My faith enables me to be steadfast in my own convictions, while at the same time loving those who do not share my religious beliefs.",
+  "I consider my own shortcomings when faced with the failures of others.",
+  // 31-40
+  "I believe that the God of the Bible is one in essence, but distinct in person — Father, Son, and Holy Spirit.",
+  "I believe that nothing I have done or do can earn my salvation.",
+  "I believe the words of the Bible are words from God.",
+  "I believe that pain and suffering can often bring me closer to God.",
+  "I exist to know, love, and serve God.",
+  "I attend religious services and worship with other believers each week.",
+  "I regularly confess my sins to God.",
+  "I spend time each day reading God's word and praying.",
+  "I regularly study the Bible to find direction for my life.",
+  "I seek to live a holy life — to be pure in body, mind and spirit.",
+  // 41-50
+  "Circumstances do not dictate my mood.",
+  "I am not angry with God, myself, or others.",
+  "I discipline my thoughts based upon my faith in Jesus Christ.",
+  "I do not burst out towards others in anger.",
+  "I am not known as a person who brags.",
+  "I believe that I cannot grow as a Christian unless I am an active member of a local church.",
+  "I believe that we are created in the image of God and therefore are equal regardless of race, religion, or gender.",
+  "I believe I am responsible before God to show compassion to the sick and imprisoned.",
+  "I believe that people who deliberately reject Jesus Christ as Savior will not inherit eternal life.",
+  "I believe that a Christian should live a sacrificial life, not driven by the pursuit of material things.",
+  // 51-60
+  "I participate in a group of Christians who really know me and support me.",
+  "I spend a good deal of time helping people with physical, emotional, or other kinds of needs.",
+  "I regularly give money to serve and help others.",
+  "I try to live so that others will see Christ in my life.",
+  "I serve God through my daily work.",
+  "I rejoice when good things happen to other people.",
+  "I am known to maintain honesty and integrity when under pressure.",
+  "I allow my friends to confront me.",
+  "I give to others, expecting nothing in return.",
+  "I am known as a person who is sensitive to the needs of others.",
+  // 61-70
+  "I believe Jesus is God in the flesh — who died and rose bodily from the dead.",
+  "I believe that salvation comes only through Jesus Christ.",
+  "I believe the Bible has decisive authority over what I say and do.",
+  "I believe that God is actively involved in my life.",
+  "I believe God loves me, even when I do not obey Him.",
+  "I give God credit for all that I am and all that I possess.",
+  "Prayer is a central part of my daily life.",
+  "I see every aspect of my life and work as service to God.",
+  "I seek to be obedient to God by applying the truth of the Bible to my life.",
+  "I am actively working to yield to God in my area(s) of secret sin(s).",
+  // 71-80
+  "I am excited about the sense of purpose I have for my life.",
+  "I forgive people who deeply hurt me.",
+  "I follow God, even when it involves suffering.",
+  "I control my tongue.",
+  "No task is too menial for me, if God calls me to do it.",
+  "I believe the community of true believers is Christ's body on earth.",
+  "I believe all people are loved by God and therefore I, too, should love them.",
+  "I believe that every person is subject to the judgment of God.",
+  "I believe that every person is subject to the judgment of God.",
+  "I believe that Christians should give at least 10% of their income to God's work.",
+  // 81-90
+  "I allow other Christians to hold me accountable for my actions.",
+  "I give away my time to serve and help others in my community.",
+  "My first priority in spending is to support God's work.",
+  "I know how to share my faith with non-Christians.",
+  "I give away things I possess, when I am so led by God.",
+  "I frequently give up what I want for the sake of others.",
+  "I always put matters into God's hands when I am under pressure.",
+  "I would rather suffer personal loss than to cheat or to be dishonest.",
+  "I help those who are in trouble or who cannot help themselves.",
+  "I am known for not raising my voice.",
+  // 91-100
+  "I believe that the Holy Spirit is God and dwells in Christians to empower them.",
+  "I believe that people are saved because of what Jesus Christ did, not what they do.",
+  "I believe the Bible is relevant to address the needs of contemporary culture.",
+  "I believe God enables me to do things I could not or would not otherwise do.",
+  "I believe I am forgiven and accepted by God.",
+  "I am not ashamed for others to know that I worship God.",
+  "I seek to grow closer to God by listening to Him in prayer.",
+  "I value a simple life-style over one cluttered with activities and material possessions.",
+  "I have a good understanding of the contents of the Bible.",
+  "I am willing to risk everything that is important in my life for Jesus Christ.",
+  // 101-110
+  "I can be content with the money and possessions I now have.",
+  "I have an inner peace from God.",
+  "I follow through on commitments I have made to God.",
+  "I do not have sexual relationships that are contrary to biblical teaching.",
+  "I am not upset when my achievements are not recognized.",
+  "I believe the purpose of the church is to share the Gospel and nurture Christians to maturity in Christ.",
+  "I believe God desires all people to have relationship with Jesus Christ.",
+  "I believe that Christians should not purchase everything they can afford, so that their discretionary money can be available to help those in need.",
+  "I believe all people who place their trust in Jesus Christ will spend eternity in heaven.",
+  "I believe God will bless Christians now and in the life to come for their good works.",
+  // 111-120
+  "I daily pray for support and for other Christians.",
+  "I regularly volunteer at my church.",
+  "My spending habits do not keep me from giving what I feel I should give to God.",
+  "I pray for non-Christians to accept Jesus Christ as their Lord and Savior.",
+  "I give up what I want to meet the needs of others.",
+  "I demonstrate love equally toward people of all races.",
+  "I keep my composure even when people or circumstances irritate me.",
+  "I would never keep money that did not belong to me.",
+  "I am known as a person who speaks words of kindness to those in need of encouragement.",
+  "I allow people to make mistakes."
+];
+
+// Competency definitions: 30 rows, each with 4 question indices (0-based)
+// Row i (0-29) uses questions: i, i+30, i+60, i+90
+const competencies = [
+  // Love God - Beliefs (rows 1-5)
+  { name: "The Trinity", group: "lg-beliefs" },
+  { name: "Personal Salvation", group: "lg-beliefs" },
+  { name: "Authority of Scripture", group: "lg-beliefs" },
+  { name: "God's Providence", group: "lg-beliefs" },
+  { name: "God's Love & Grace", group: "lg-beliefs" },
+  // Love God - Practices (rows 6-10)
+  { name: "Worship", group: "lg-practices" },
+  { name: "Prayer", group: "lg-practices" },
+  { name: "Lordship of Christ", group: "lg-practices" },
+  { name: "Bible Study", group: "lg-practices" },
+  { name: "Obedience / Holy Living", group: "lg-practices" },
+  // Love God - Virtues (rows 11-15)
+  { name: "Contentment", group: "lg-virtues" },
+  { name: "Forgiveness (received)", group: "lg-virtues" },
+  { name: "Courage / Commitment", group: "lg-virtues" },
+  { name: "Self-Control", group: "lg-virtues" },
+  { name: "Humility", group: "lg-virtues" },
+  // Love Neighbor - Beliefs (rows 16-20)
+  { name: "The Church", group: "ln-beliefs" },
+  { name: "Human Dignity & Equality", group: "ln-beliefs" },
+  { name: "Compassion & Justice", group: "ln-beliefs" },
+  { name: "Salvation & Judgment", group: "ln-beliefs" },
+  { name: "Stewardship Beliefs", group: "ln-beliefs" },
+  // Love Neighbor - Practices (rows 21-25)
+  { name: "Spiritual Community", group: "ln-practices" },
+  { name: "Serving Others", group: "ln-practices" },
+  { name: "Financial Giving", group: "ln-practices" },
+  { name: "Sharing Faith", group: "ln-practices" },
+  { name: "Purposeful Living", group: "ln-practices" },
+  // Love Neighbor - Virtues (rows 26-30)
+  { name: "Love for Others", group: "ln-virtues" },
+  { name: "Patience & Integrity", group: "ln-virtues" },
+  { name: "Honesty", group: "ln-virtues" },
+  { name: "Generosity & Kindness", group: "ln-virtues" },
+  { name: "Grace toward Others", group: "ln-virtues" },
+];
+
+// Page structure: 12 question pages of 10 questions each
+const QUESTIONS_PER_PAGE = 10;
+const TOTAL_QUESTION_PAGES = 12;
+const RESULTS_PAGE = 13;
+const TOTAL_PAGES = 14; // 0 (welcome) + 12 (questions) + 1 (results)
+
+let answers = new Array(120).fill(null);
+let currentPage = 0;
+
+// ============================================================
+// BUILD QUESTION PAGES
+// ============================================================
+
+const sectionLabels = [
+  { range: [0,29], label: "Love God", sub: "Questions 1–30" },
+  { range: [30,59], label: "Love God (continued)", sub: "Questions 31–60" },
+  { range: [60,89], label: "Love God (continued)", sub: "Questions 61–90" },
+  { range: [90,119], label: "Love Neighbor", sub: "Questions 91–120" }
+];
+
+function getSectionLabel(qIndex) {
+  if (qIndex < 30) return { label: "Love God", sub: "Questions 1–30" };
+  if (qIndex < 60) return { label: "Love God — continued", sub: "Questions 31–60" };
+  if (qIndex < 90) return { label: "Love God — continued", sub: "Questions 61–90" };
+  return { label: "Love Neighbor", sub: "Questions 91–120" };
+}
+
+function buildQuestionPages() {
+  const main = document.querySelector('main');
+
+  for (let p = 1; p <= TOTAL_QUESTION_PAGES; p++) {
+    const startQ = (p - 1) * QUESTIONS_PER_PAGE; // 0-based
+    const endQ = Math.min(startQ + QUESTIONS_PER_PAGE, 120); // exclusive
+
+    const sec = getSectionLabel(startQ);
+
+    const pageDiv = document.createElement('div');
+    pageDiv.className = 'page';
+    pageDiv.id = `page-${p}`;
+
+    pageDiv.innerHTML = `
+      <div class="section-header">${sec.label}</div>
+      <div class="section-sub">Questions ${startQ + 1}–${endQ}</div>
+      <div class="section-sub" style="background:rgba(255,255,255,0.15); font-size:0.78rem; padding:5px 20px; color:#000;">
+        Rate each statement: <strong>0</strong> = Does not apply at all &nbsp;|&nbsp; <strong>5</strong> = Applies completely
+      </div>
+      <div class="questions-card" id="questions-card-${p}">
+      </div>
+      <div class="warning-msg" id="warn-${p}">Please answer all questions on this page before continuing.</div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="goToPage(${p - 1})">← Back</button>
+        <button class="btn btn-primary" onclick="nextPage(${p})">${p === TOTAL_QUESTION_PAGES ? 'View My Results →' : 'Next →'}</button>
+      </div>
+    `;
+
+    const card = pageDiv.querySelector(`#questions-card-${p}`);
+
+    for (let qi = startQ; qi < endQ; qi++) {
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'question-row';
+      rowDiv.id = `qrow-${qi}`;
+
+      let scaleHTML = '';
+      for (let v = 0; v <= 5; v++) {
+        scaleHTML += `
+          <label>
+            <input type="radio" name="q${qi}" value="${v}" onchange="setAnswer(${qi}, ${v})">
+            <div class="radio-btn">${v}</div>
+          </label>`;
+      }
+
+      rowDiv.innerHTML = `
+        <div class="q-num">${qi + 1}.</div>
+        <div class="q-text">${questions[qi]}</div>
+        <div class="q-scale">${scaleHTML}</div>
+      `;
+      card.appendChild(rowDiv);
+    }
+
+    main.appendChild(pageDiv);
+  }
+
+  // Results page
+  const resultsDiv = document.createElement('div');
+  resultsDiv.className = 'page';
+  resultsDiv.id = `page-${RESULTS_PAGE}`;
+  resultsDiv.innerHTML = `
+    <div class="results-card">
+      <h2>Your Christian Life Profile Results</h2>
+      <p>Here is your personal assessment across all six dimensions. Each bar shows your score relative to the maximum possible. Use these results to identify areas of strength and opportunities for growth.</p>
+      <div class="big-totals">
+        <div class="big-total-box">
+          <div class="score-num" id="res-lg-total">—</div>
+          <div class="score-denom">/ 300</div>
+          <div class="score-label">Love God</div>
+        </div>
+        <div class="big-total-box">
+          <div class="score-num" id="res-ln-total">—</div>
+          <div class="score-denom">/ 300</div>
+          <div class="score-label">Love Neighbor</div>
+        </div>
+      </div>
+
+      <div class="category-section">
+        <h3>Love God</h3>
+
+        <div class="subcategory">
+          <div class="subcategory-title">Beliefs</div>
+          ${buildCompRows('lg-beliefs', [0,1,2,3,4])}
+          ${buildSubtotalRow('lg-beliefs-total', 'Total: Love God — Beliefs')}
+        </div>
+
+        <div class="subcategory">
+          <div class="subcategory-title">Practices</div>
+          ${buildCompRows('lg-practices', [5,6,7,8,9])}
+          ${buildSubtotalRow('lg-practices-total', 'Total: Love God — Practices')}
+        </div>
+
+        <div class="subcategory">
+          <div class="subcategory-title">Virtues</div>
+          ${buildCompRows('lg-virtues', [10,11,12,13,14])}
+          ${buildSubtotalRow('lg-virtues-total', 'Total: Love God — Virtues')}
+        </div>
+      </div>
+
+      <div class="category-section">
+        <h3>Love Neighbor</h3>
+
+        <div class="subcategory">
+          <div class="subcategory-title">Beliefs</div>
+          ${buildCompRows('ln-beliefs', [15,16,17,18,19])}
+          ${buildSubtotalRow('ln-beliefs-total', 'Total: Love Neighbor — Beliefs')}
+        </div>
+
+        <div class="subcategory">
+          <div class="subcategory-title">Practices</div>
+          ${buildCompRows('ln-practices', [20,21,22,23,24])}
+          ${buildSubtotalRow('ln-practices-total', 'Total: Love Neighbor — Practices')}
+        </div>
+
+        <div class="subcategory">
+          <div class="subcategory-title">Virtues</div>
+          ${buildCompRows('ln-virtues', [25,26,27,28,29])}
+          ${buildSubtotalRow('ln-virtues-total', 'Total: Love Neighbor — Virtues')}
+        </div>
+      </div>
+    </div>
+
+    <div class="reflection-section">
+      <h3>Personal Reflection</h3>
+      <p>While the material is fresh in your mind and heart, capture your thoughts, feelings, and what God may be saying to you. Note any areas that seemed particularly sensitive, and any action steps you feel called to take.</p>
+      <textarea placeholder="Write your thoughts here..."></textarea>
+    </div>
+
+    <div class="btn-row" style="margin-top:24px;">
+      <button class="btn btn-secondary" onclick="goToPage(${TOTAL_QUESTION_PAGES})">← Review Answers</button>
+      <button class="btn btn-gold" onclick="window.print()">Print Results</button>
+    </div>
+    <p style="margin-top:20px; font-size:0.78rem; color:var(--muted); font-family:sans-serif; text-align:center; line-height:1.6;">
+      <em>The Christian Life Profile</em>, 2000 Edition &mdash; created by <strong>Randy Frazee</strong>.<br>
+      All assessment content is the intellectual property of Randy Frazee.
+    </p>
+  `;
+  main.appendChild(resultsDiv);
+}
+
+function buildCompRows(group, indices) {
+  return indices.map(i => `
+    <div class="competency-row">
+      <div class="comp-name">${competencies[i].name}</div>
+      <div class="comp-bar-bg"><div class="comp-bar-fill" id="bar-${i}" style="width:0%"></div></div>
+      <div class="comp-score" id="score-${i}">—/20</div>
+    </div>
+  `).join('');
+}
+
+function buildSubtotalRow(id, label) {
+  return `
+    <div class="subtotal-row">
+      <div class="subtotal-label">${label}</div>
+      <div class="subtotal-bar-bg"><div class="subtotal-bar-fill" id="bar-${id}" style="width:0%"></div></div>
+      <div class="subtotal-score" id="score-${id}">—/100</div>
+    </div>
+  `;
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+
+function updateProgress(page) {
+  const pct = page === 0 ? 0 : Math.round((page / (TOTAL_PAGES - 1)) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  if (page === 0) {
+    document.getElementById('progressLabel').textContent = 'Step 1 of 13';
+  } else if (page <= TOTAL_QUESTION_PAGES) {
+    document.getElementById('progressLabel').textContent =
+      `Page ${page} of 12 — Question ${(page-1)*10+1}–${Math.min(page*10,120)} of 120`;
+  } else {
+    document.getElementById('progressLabel').textContent = 'Results';
+  }
+}
+
+function goToPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(`page-${n}`);
+  if (target) {
+    target.classList.add('active');
+    currentPage = n;
+    updateProgress(n);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function nextPage(p) {
+  // Validate all questions on this page are answered
+  const startQ = (p - 1) * QUESTIONS_PER_PAGE;
+  const endQ = Math.min(startQ + QUESTIONS_PER_PAGE, 120);
+  let unanswered = false;
+
+  for (let qi = startQ; qi < endQ; qi++) {
+    if (answers[qi] === null) {
+      unanswered = true;
+      document.getElementById(`qrow-${qi}`).style.background = '#fff5f5';
+      document.getElementById(`qrow-${qi}`).style.borderLeft = '3px solid #e74c3c';
+    } else {
+      document.getElementById(`qrow-${qi}`).style.borderLeft = '';
+    }
+  }
+
+  const warn = document.getElementById(`warn-${p}`);
+  if (unanswered) {
+    warn.style.display = 'block';
+    // Scroll to first unanswered
+    for (let qi = startQ; qi < endQ; qi++) {
+      if (answers[qi] === null) {
+        document.getElementById(`qrow-${qi}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        break;
+      }
+    }
+    return;
+  }
+  warn.style.display = 'none';
+
+  if (p === TOTAL_QUESTION_PAGES) {
+    calculateResults();
+    goToPage(RESULTS_PAGE);
+  } else {
+    goToPage(p + 1);
+  }
+}
+
+// ============================================================
+// ANSWER TRACKING
+// ============================================================
+
+function setAnswer(qIndex, value) {
+  answers[qIndex] = value;
+  const row = document.getElementById(`qrow-${qIndex}`);
+  row.classList.add('answered');
+  row.style.background = '';
+  row.style.borderLeft = '';
+}
+
+// ============================================================
+// SCORING
+// ============================================================
+
+function calculateResults() {
+  // Each competency i (0-29) uses questions: i, i+30, i+60, i+90
+  const compScores = competencies.map((_, i) => {
+    const qs = [i, i + 30, i + 60, i + 90];
+    return qs.reduce((sum, qi) => sum + (answers[qi] || 0), 0);
+  });
+
+  // Update individual competency bars
+  compScores.forEach((score, i) => {
+    const bar = document.getElementById(`bar-${i}`);
+    const lbl = document.getElementById(`score-${i}`);
+    if (bar) { bar.style.width = (score / 20 * 100) + '%'; }
+    if (lbl) { lbl.textContent = `${score}/20`; }
+  });
+
+  // Subtotals: groups of 5
+  const groups = [
+    { id: 'lg-beliefs', indices: [0,1,2,3,4] },
+    { id: 'lg-practices', indices: [5,6,7,8,9] },
+    { id: 'lg-virtues', indices: [10,11,12,13,14] },
+    { id: 'ln-beliefs', indices: [15,16,17,18,19] },
+    { id: 'ln-practices', indices: [20,21,22,23,24] },
+    { id: 'ln-virtues', indices: [25,26,27,28,29] },
+  ];
+
+  const groupTotals = {};
+  groups.forEach(g => {
+    const total = g.indices.reduce((sum, i) => sum + compScores[i], 0);
+    groupTotals[g.id] = total;
+    const bar = document.getElementById(`bar-${g.id}-total`);
+    const lbl = document.getElementById(`score-${g.id}-total`);
+    if (bar) { bar.style.width = (total / 100 * 100) + '%'; }
+    if (lbl) { lbl.textContent = `${total}/100`; }
+  });
+
+  const lgTotal = groupTotals['lg-beliefs'] + groupTotals['lg-practices'] + groupTotals['lg-virtues'];
+  const lnTotal = groupTotals['ln-beliefs'] + groupTotals['ln-practices'] + groupTotals['ln-virtues'];
+
+  document.getElementById('res-lg-total').textContent = lgTotal;
+  document.getElementById('res-ln-total').textContent = lnTotal;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+buildQuestionPages();
+updateProgress(0);
+</script>
+</body>
+</html>
