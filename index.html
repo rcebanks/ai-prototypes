@@ -37,6 +37,38 @@
     border-bottom: 1px solid var(--rule);
   }
 
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+
+  .header-photo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    flex-shrink: 0;
+    border: 2px solid var(--rule);
+  }
+
+  .header-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .header-name span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
   .site-header h1 {
     font-size: clamp(2.2rem, 6vw, 3.6rem);
     font-weight: 700;
@@ -45,7 +77,8 @@
     color: var(--ink);
   }
 
-  .site-header h1 span {
+  .site-header h1 em {
+    font-style: normal;
     color: var(--accent);
   }
 
@@ -142,7 +175,11 @@
 <div class="page">
 
   <header class="site-header">
-    <h1>Things I've<br>been <span>building.</span></h1>
+    <div class="header-top">
+      <img class="header-photo" src="/Rachelle%20Ebanks.jpg" alt="Rachelle Ebanks">
+      <div class="header-name">Rachelle Ebanks<span>Building things with AI</span></div>
+    </div>
+    <h1>Things I've<br>been <em>building.</em></h1>
     <p class="tagline">A collection of prototypes I've made — faith tools, trackers, and whatever else I felt like making.</p>
   </header>
 
