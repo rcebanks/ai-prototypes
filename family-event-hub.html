@@ -159,7 +159,7 @@ body {
 .btn-signout:hover { border-color: var(--gold-lt); color: var(--ink); }
 
 /* ── CONTENT ──────────────────────────────────────────── */
-.content { padding: 28px 0 80px; }
+.content { padding: 28px 0 0; }
 
 /* ── LIST VIEW ────────────────────────────────────────── */
 #view-list { display: block; }
@@ -172,9 +172,7 @@ body {
   text-transform: uppercase; letter-spacing: .08em; color: var(--muted);
 }
 
-.th-sort {
-  cursor: pointer; user-select: none;
-}
+.th-sort { cursor: pointer; user-select: none; }
 .th-sort:hover { color: var(--ink); }
 .sort-arrow { margin-left: 4px; opacity: 0.5; font-style: normal; }
 
@@ -186,15 +184,11 @@ body {
 .list-row { transition: background .1s; }
 .list-row:hover td { background: var(--gold-bg); }
 
-.list-name {
-  font-weight: 600; font-size: 0.93rem; cursor: pointer;
-}
-
+.list-name { font-weight: 600; font-size: 0.93rem; cursor: pointer; }
 .list-date, .list-lead { font-size: 0.84rem; color: var(--muted); }
 
 .list-link a {
-  font-size: 0.8rem; color: var(--gold); font-weight: 500;
-  text-decoration: none;
+  font-size: 0.8rem; color: var(--gold); font-weight: 500; text-decoration: none;
 }
 .list-link a:hover { text-decoration: underline; }
 
@@ -246,10 +240,7 @@ body {
 .cal-nav button:hover { border-color: var(--gold-lt); color: var(--ink); }
 .cal-nav h3 { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
 
-.cal-grid {
-  display: grid; grid-template-columns: repeat(7, 1fr);
-  gap: 3px;
-}
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
 
 .cal-day-header {
   text-align: center; padding: 5px 0;
@@ -267,9 +258,7 @@ body {
 .cal-cell.other-month { background: transparent; border-color: transparent; }
 .cal-cell.other-month .cal-num { color: #d0c4b0; }
 
-.cal-num {
-  font-size: 0.75rem; font-weight: 500; color: var(--muted); margin-bottom: 4px;
-}
+.cal-num { font-size: 0.75rem; font-weight: 500; color: var(--muted); margin-bottom: 4px; }
 
 .cal-cell.today .cal-num {
   background: var(--gold); color: #fff;
@@ -282,8 +271,7 @@ body {
   background: var(--gold-bg); color: var(--gold);
   border-left: 2px solid var(--gold);
   border-radius: 3px; padding: 2px 5px; margin-bottom: 2px;
-  cursor: pointer; white-space: nowrap;
-  overflow: hidden; text-overflow: ellipsis;
+  cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   transition: background .1s;
 }
 
@@ -293,8 +281,7 @@ body {
 .badge {
   display: inline-flex; align-items: center;
   border-radius: 4px; padding: 2px 8px;
-  font-size: 0.68rem; font-weight: 600; white-space: nowrap;
-  letter-spacing: .02em;
+  font-size: 0.68rem; font-weight: 600; white-space: nowrap; letter-spacing: .02em;
 }
 
 .badge-planning   { background: #f5f0e8; color: var(--muted); }
@@ -311,7 +298,7 @@ body {
   color: var(--muted); transition: all .15s;
 }
 
-.btn-icon:hover { border-color: var(--gold-lt); color: var(--ink); }
+.btn-icon:hover     { border-color: var(--gold-lt); color: var(--ink); }
 .btn-icon.del:hover { border-color: #fca5a5; color: #dc2626; }
 
 /* ── MODAL ────────────────────────────────────────────── */
@@ -355,23 +342,20 @@ body {
   font-family: inherit; transition: border-color .15s;
 }
 
-.field input:focus, .field select:focus, .field textarea:focus {
-  border-color: var(--gold);
-}
-
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold); }
 .field textarea { min-height: 76px; resize: vertical; }
-
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 .modal-actions {
-  display: flex; gap: 10px; justify-content: flex-end; margin-top: 22px;
+  display: flex; gap: 10px; align-items: center; margin-top: 22px;
 }
+
+.modal-actions .spacer { flex: 1; }
 
 .btn-cancel {
   background: none; border: 1px solid var(--rule);
   border-radius: 8px; padding: 9px 20px;
-  font-size: 0.85rem; color: var(--muted); cursor: pointer;
-  transition: all .15s;
+  font-size: 0.85rem; color: var(--muted); cursor: pointer; transition: all .15s;
 }
 
 .btn-cancel:hover { border-color: var(--gold-lt); color: var(--ink); }
@@ -379,16 +363,67 @@ body {
 .btn-save {
   background: var(--gold); color: #fff; border: none;
   border-radius: 8px; padding: 9px 22px;
-  font-size: 0.85rem; font-weight: 600; cursor: pointer;
-  transition: background .15s;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background .15s;
 }
 
 .btn-save:hover { background: #9a7020; }
 
+.btn-archive {
+  background: none; border: none; padding: 0;
+  font-size: 0.8rem; color: var(--muted); cursor: pointer;
+  text-decoration: underline; text-underline-offset: 2px;
+  transition: color .15s;
+}
+
+.btn-archive:hover { color: var(--ink); }
+
 /* ── EMPTY STATE ──────────────────────────────────────── */
 .empty {
-  padding: 56px 0; color: var(--muted);
-  font-size: 0.875rem; line-height: 1.6;
+  padding: 56px 0; color: var(--muted); font-size: 0.875rem; line-height: 1.6;
+}
+
+/* ── ARCHIVE SECTION ──────────────────────────────────── */
+.archive-section {
+  border-top: 1px solid var(--rule);
+  margin-top: 40px; padding-bottom: 60px;
+}
+
+.archive-toggle {
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  padding: 16px 0;
+  font-size: 0.78rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .07em;
+  color: var(--muted); transition: color .15s; width: 100%; text-align: left;
+}
+
+.archive-toggle:hover { color: var(--ink); }
+.archive-caret { font-style: normal; transition: transform .2s; display: inline-block; }
+.archive-toggle.open .archive-caret { transform: rotate(90deg); }
+
+#archive-list { display: none; }
+#archive-list.open { display: block; }
+
+.archive-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 0; border-top: 1px solid var(--rule);
+  font-size: 0.875rem;
+}
+
+.archive-name { font-weight: 600; color: var(--muted); flex: 1; }
+.archive-date { font-size: 0.8rem; color: var(--rule); white-space: nowrap; }
+
+.btn-restore {
+  background: none; border: 1px solid var(--rule);
+  border-radius: 6px; padding: 4px 12px;
+  font-size: 0.75rem; color: var(--muted); cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+
+.btn-restore:hover { border-color: var(--gold-lt); color: var(--ink); }
+
+.archive-empty {
+  padding: 16px 0; font-size: 0.85rem; color: var(--rule);
 }
 
 /* ── RESPONSIVE ───────────────────────────────────────── */
@@ -459,7 +494,7 @@ body {
     <!-- GALLERY -->
     <div id="view-gallery">
       <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
-        <button class="th-sort" onclick="toggleDateSort()" id="gallery-sort-btn"
+        <button class="th-sort" onclick="toggleDateSort()"
           style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px">
           Date <i class="sort-arrow" id="gallery-sort-arrow">↕</i>
         </button>
@@ -481,6 +516,17 @@ body {
     </div>
 
   </div>
+
+  <!-- ── ARCHIVE ──────────────────────────────────────── -->
+  <div class="archive-section">
+    <button class="archive-toggle" onclick="toggleArchive()" id="archive-toggle">
+      <i class="archive-caret">›</i> Archive <span id="archive-count"></span>
+    </button>
+    <div id="archive-list">
+      <div id="archive-body"></div>
+    </div>
+  </div>
+
 </div>
 </div>
 
@@ -527,6 +573,8 @@ body {
     </div>
 
     <div class="modal-actions">
+      <button class="btn-archive" id="modal-archive-btn" style="display:none" onclick="archiveFromModal()">Archive</button>
+      <div class="spacer"></div>
       <button class="btn-cancel" onclick="closeModal()">Cancel</button>
       <button class="btn-save"   onclick="saveEvent()">Save</button>
     </div>
@@ -535,7 +583,6 @@ body {
 
 <script>
 // ── PASSWORD ───────────────────────────────────────────────────────
-// Change this to your family password before deploying.
 const FAMILY_PASSWORD = "syblings26";
 
 function checkPassword() {
@@ -573,12 +620,12 @@ if (sessionStorage.getItem('fhh-auth')) {
 const STORE = 'fhh-events';
 
 const DEFAULTS = [
-  { id: uid(), name: "Mother's Day",   date: '2026-05-10', lead: 'TBD', status: 'Planning', url: '', notes: '' },
-  { id: uid(), name: "Father's Day",   date: '2026-06-21', lead: 'TBD', status: 'Planning', url: '', notes: '' },
-  { id: uid(), name: "Mom's Birthday", date: '',           lead: 'TBD', status: 'Planning', url: '', notes: '' },
-  { id: uid(), name: "Dad's Birthday", date: '',           lead: 'TBD', status: 'Planning', url: '', notes: '' },
-  { id: uid(), name: 'Thanksgiving',   date: '2026-11-26', lead: 'TBD', status: 'Planning', url: '', notes: '' },
-  { id: uid(), name: 'Christmas',      date: '2026-12-25', lead: 'TBD', status: 'Planning', url: '', notes: '' },
+  { id: uid(), name: "Mother's Day",   date: '2026-05-10', lead: 'TBD', status: 'Planning', url: '', notes: '', archived: false },
+  { id: uid(), name: "Father's Day",   date: '2026-06-21', lead: 'TBD', status: 'Planning', url: '', notes: '', archived: false },
+  { id: uid(), name: "Mom's Birthday", date: '',           lead: 'TBD', status: 'Planning', url: '', notes: '', archived: false },
+  { id: uid(), name: "Dad's Birthday", date: '',           lead: 'TBD', status: 'Planning', url: '', notes: '', archived: false },
+  { id: uid(), name: 'Thanksgiving',   date: '2026-11-26', lead: 'TBD', status: 'Planning', url: '', notes: '', archived: false },
+  { id: uid(), name: 'Christmas',      date: '2026-12-25', lead: 'TBD', status: 'Planning', url: '', notes: '', archived: false },
 ];
 
 function uid() {
@@ -606,10 +653,13 @@ function setView(v) {
 }
 
 function renderAll() {
-  const events = loadEvents();
-  renderList(events);
-  renderGallery(events);
-  renderCalendar(events);
+  const all      = loadEvents();
+  const active   = all.filter(e => !e.archived);
+  const archived = all.filter(e =>  e.archived);
+  renderList(active);
+  renderGallery(active);
+  renderCalendar(active);
+  renderArchive(archived);
 }
 
 // ── HELPERS ────────────────────────────────────────────────────────
@@ -627,8 +677,18 @@ function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+function sortByDate(events) {
+  if (!dateSort) return events;
+  return [...events].sort((a, b) => {
+    if (!a.date && !b.date) return 0;
+    if (!a.date) return 1;
+    if (!b.date) return -1;
+    return dateSort === 'asc' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date);
+  });
+}
+
 // ── LIST ───────────────────────────────────────────────────────────
-let dateSort = null; // null = unsorted, 'asc' = oldest first, 'desc' = newest first
+let dateSort = null;
 
 function toggleDateSort() {
   dateSort = dateSort === 'asc' ? 'desc' : 'asc';
@@ -645,17 +705,7 @@ function renderList(events) {
   if (!events.length) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
 
-  // Sort by date if active — events with no date go to the bottom
-  if (dateSort) {
-    events = [...events].sort((a, b) => {
-      if (!a.date && !b.date) return 0;
-      if (!a.date) return 1;
-      if (!b.date) return -1;
-      return dateSort === 'asc' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date);
-    });
-  }
-
-  events.forEach(ev => {
+  sortByDate(events).forEach(ev => {
     const tr = document.createElement('tr');
     tr.className = 'list-row';
     tr.innerHTML = `
@@ -668,8 +718,9 @@ function renderList(events) {
       </td>
       <td>
         <div class="list-actions">
-          <button class="btn-icon"     onclick="editEvent('${ev.id}')" title="Edit">&#9998;</button>
-          <button class="btn-icon del" onclick="deleteEvent('${ev.id}')" title="Delete">&#10005;</button>
+          <button class="btn-icon"     onclick="editEvent('${ev.id}')"    title="Edit">&#9998;</button>
+          <button class="btn-icon"     onclick="archiveEvent('${ev.id}')" title="Archive">&#8691;</button>
+          <button class="btn-icon del" onclick="deleteEvent('${ev.id}')"  title="Delete">&#10005;</button>
         </div>
       </td>
     `;
@@ -686,16 +737,7 @@ function renderGallery(events) {
   if (!events.length) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
 
-  if (dateSort) {
-    events = [...events].sort((a, b) => {
-      if (!a.date && !b.date) return 0;
-      if (!a.date) return 1;
-      if (!b.date) return -1;
-      return dateSort === 'asc' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date);
-    });
-  }
-
-  events.forEach(ev => {
+  sortByDate(events).forEach(ev => {
     const card = document.createElement('div');
     card.className = 'gallery-card';
     card.innerHTML = `
@@ -770,12 +812,69 @@ function renderCalendar(events) {
   }
 }
 
-function calPrev() { if (--calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(loadEvents()); }
-function calNext() { if (++calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(loadEvents()); }
+function calPrev() { if (--calMonth < 0) { calMonth = 11; calYear--; } renderCalendar(loadEvents().filter(e => !e.archived)); }
+function calNext() { if (++calMonth > 11) { calMonth = 0; calYear++; } renderCalendar(loadEvents().filter(e => !e.archived)); }
+
+// ── ARCHIVE ────────────────────────────────────────────────────────
+function archiveEvent(id) {
+  const events = loadEvents();
+  const ev = events.find(e => e.id === id);
+  if (!ev) return;
+  ev.archived = true;
+  saveEvents(events);
+  closeModal();
+  renderAll();
+}
+
+function restoreEvent(id) {
+  const events = loadEvents();
+  const ev = events.find(e => e.id === id);
+  if (!ev) return;
+  ev.archived = false;
+  saveEvents(events);
+  renderAll();
+}
+
+function archiveFromModal() {
+  const id = document.getElementById('edit-id').value;
+  if (id) archiveEvent(id);
+}
+
+function toggleArchive() {
+  const btn  = document.getElementById('archive-toggle');
+  const list = document.getElementById('archive-list');
+  btn.classList.toggle('open');
+  list.classList.toggle('open');
+}
+
+function renderArchive(archived) {
+  const body  = document.getElementById('archive-body');
+  const count = document.getElementById('archive-count');
+  body.innerHTML = '';
+  count.textContent = archived.length ? `(${archived.length})` : '';
+
+  if (!archived.length) {
+    body.innerHTML = '<div class="archive-empty">Nothing archived yet.</div>';
+    return;
+  }
+
+  archived.forEach(ev => {
+    const row = document.createElement('div');
+    row.className = 'archive-row';
+    row.innerHTML = `
+      <span class="archive-name">${esc(ev.name)}</span>
+      <span class="archive-date">${formatDate(ev.date)}</span>
+      <button class="btn-restore" onclick="restoreEvent('${ev.id}')">Restore</button>
+      <button class="btn-icon del" onclick="deleteEvent('${ev.id}')" title="Delete permanently">&#10005;</button>
+    `;
+    body.appendChild(row);
+  });
+}
 
 // ── MODAL ──────────────────────────────────────────────────────────
 function openModal(ev) {
-  document.getElementById('modal-title').textContent = ev ? 'Edit Event' : 'New Event';
+  const isEdit = !!ev;
+  document.getElementById('modal-title').textContent = isEdit ? 'Edit Event' : 'New Event';
   document.getElementById('edit-id').value  = ev?.id    ?? '';
   document.getElementById('f-name').value   = ev?.name  ?? '';
   document.getElementById('f-date').value   = ev?.date  ?? '';
@@ -783,6 +882,8 @@ function openModal(ev) {
   document.getElementById('f-status').value = ev?.status ?? 'Planning';
   document.getElementById('f-url').value    = ev?.url   ?? '';
   document.getElementById('f-notes').value  = ev?.notes ?? '';
+  // Only show Archive button when editing an existing event
+  document.getElementById('modal-archive-btn').style.display = isEdit ? 'inline' : 'none';
   document.getElementById('modal').classList.add('open');
   setTimeout(() => document.getElementById('f-name').focus(), 50);
 }
@@ -801,17 +902,20 @@ function saveEvent() {
   if (!name) { document.getElementById('f-name').focus(); return; }
 
   const id = document.getElementById('edit-id').value;
+  const events = loadEvents();
+  const existing = events.find(e => e.id === id);
+
   const record = {
-    id:     id || uid(),
+    id:       id || uid(),
     name,
-    date:   document.getElementById('f-date').value,
-    lead:   document.getElementById('f-lead').value.trim(),
-    status: document.getElementById('f-status').value,
-    url:    document.getElementById('f-url').value.trim(),
-    notes:  document.getElementById('f-notes').value.trim(),
+    date:     document.getElementById('f-date').value,
+    lead:     document.getElementById('f-lead').value.trim(),
+    status:   document.getElementById('f-status').value,
+    url:      document.getElementById('f-url').value.trim(),
+    notes:    document.getElementById('f-notes').value.trim(),
+    archived: existing?.archived ?? false,
   };
 
-  const events = loadEvents();
   if (id) {
     const i = events.findIndex(e => e.id === id);
     if (i !== -1) events[i] = record;
@@ -825,7 +929,7 @@ function saveEvent() {
 }
 
 function deleteEvent(id) {
-  if (!confirm('Remove this event?')) return;
+  if (!confirm('Permanently delete this event?')) return;
   saveEvents(loadEvents().filter(e => e.id !== id));
   renderAll();
 }
