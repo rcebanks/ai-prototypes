@@ -458,6 +458,12 @@ body {
 
     <!-- GALLERY -->
     <div id="view-gallery">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
+        <button class="th-sort" onclick="toggleDateSort()" id="gallery-sort-btn"
+          style="font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px">
+          Date <i class="sort-arrow" id="gallery-sort-arrow">↕</i>
+        </button>
+      </div>
       <div class="gallery-grid" id="gallery-grid"></div>
       <div id="gallery-empty" class="empty" style="display:none">
         No events yet. Hit <strong>+ New Event</strong> to add the first one.
@@ -626,8 +632,10 @@ let dateSort = null; // null = unsorted, 'asc' = oldest first, 'desc' = newest f
 
 function toggleDateSort() {
   dateSort = dateSort === 'asc' ? 'desc' : 'asc';
-  document.getElementById('sort-arrow').textContent = dateSort === 'asc' ? '↑' : '↓';
-  renderList(loadEvents());
+  const arrow = dateSort === 'asc' ? '↑' : '↓';
+  document.getElementById('sort-arrow').textContent = arrow;
+  document.getElementById('gallery-sort-arrow').textContent = arrow;
+  renderAll();
 }
 
 function renderList(events) {
@@ -677,6 +685,15 @@ function renderGallery(events) {
   grid.innerHTML = '';
   if (!events.length) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
+
+  if (dateSort) {
+    events = [...events].sort((a, b) => {
+      if (!a.date && !b.date) return 0;
+      if (!a.date) return 1;
+      if (!b.date) return -1;
+      return dateSort === 'asc' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date);
+    });
+  }
 
   events.forEach(ev => {
     const card = document.createElement('div');
