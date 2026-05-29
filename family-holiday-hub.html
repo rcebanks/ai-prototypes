@@ -172,6 +172,12 @@ body {
   text-transform: uppercase; letter-spacing: .08em; color: var(--muted);
 }
 
+.th-sort {
+  cursor: pointer; user-select: none;
+}
+.th-sort:hover { color: var(--ink); }
+.sort-arrow { margin-left: 4px; opacity: 0.5; font-style: normal; }
+
 .list-table td {
   padding: 13px 12px; border-top: 1px solid var(--rule);
   vertical-align: middle;
@@ -436,7 +442,7 @@ body {
         <thead>
           <tr>
             <th>Event</th>
-            <th>Date</th>
+            <th class="th-sort" onclick="toggleDateSort()" id="th-date">Date <i class="sort-arrow" id="sort-arrow">↕</i></th>
             <th>Lead</th>
             <th>Status</th>
             <th>Link</th>
@@ -616,12 +622,30 @@ function esc(s) {
 }
 
 // ── LIST ───────────────────────────────────────────────────────────
+let dateSort = null; // null = unsorted, 'asc' = oldest first, 'desc' = newest first
+
+function toggleDateSort() {
+  dateSort = dateSort === 'asc' ? 'desc' : 'asc';
+  document.getElementById('sort-arrow').textContent = dateSort === 'asc' ? '↑' : '↓';
+  renderList(loadEvents());
+}
+
 function renderList(events) {
   const tbody = document.getElementById('list-body');
   const empty = document.getElementById('list-empty');
   tbody.innerHTML = '';
   if (!events.length) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
+
+  // Sort by date if active — events with no date go to the bottom
+  if (dateSort) {
+    events = [...events].sort((a, b) => {
+      if (!a.date && !b.date) return 0;
+      if (!a.date) return 1;
+      if (!b.date) return -1;
+      return dateSort === 'asc' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date);
+    });
+  }
 
   events.forEach(ev => {
     const tr = document.createElement('tr');
