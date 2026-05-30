@@ -260,6 +260,53 @@
       padding: 12px 36px;
     }
 
+    /* ============================================================
+       CARD HOVER OVERLAY
+       Terracotta panel slides up over the image on hover,
+       revealing the system's one-line definition.
+       ============================================================ */
+    .card-image-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-hover-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(196, 99, 42, 0.93);
+      padding: 20px 22px;
+      transform: translateY(100%);
+      transition: transform 300ms ease-out;
+    }
+
+    .card-hover-text {
+      color: #FFFFFF;
+      font-size: 13px;
+      line-height: 1.65;
+      font-family: var(--font-body);
+    }
+
+    .system-card:hover .card-hover-overlay {
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       SCROLL FADE-IN
+       Elements start invisible and slide up as they enter view.
+       ============================================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* Button: no fill at rest, fills with accent on hover */
     .btn-learn-more {
       display: inline-block;
@@ -548,7 +595,7 @@
          ============================================================ -->
     <section class="systems-section">
 
-      <div class="systems-header">
+      <div class="systems-header fade-in">
         <span class="label systems-section-label">EXPLORE</span>
         <h2 class="systems-title">The Six Systems</h2>
         <p class="systems-intro">Here are the six systems that make or break your business.</p>
@@ -557,8 +604,13 @@
       <div class="systems-grid">
 
         <!-- CARD 01 -->
-        <div class="system-card">
-          <img src="s3-card-01.png" alt="Strategic Management" class="card-image">
+        <div class="system-card fade-in">
+          <div class="card-image-wrap">
+            <img src="s3-card-01.png" alt="Strategic Management" class="card-image">
+            <div class="card-hover-overlay">
+              <p class="card-hover-text">The system by which an organization establishes where it is going, why it exists, and how it will measure progress toward its goals.</p>
+            </div>
+          </div>
           <div class="card-body">
             <h3 class="card-name">Strategic Management</h3>
             <button class="btn-learn-more" onclick="openDrawer(0)">Learn More</button>
@@ -566,8 +618,13 @@
         </div>
 
         <!-- CARD 02 -->
-        <div class="system-card">
-          <img src="s3-card-02.png" alt="Growth" class="card-image">
+        <div class="system-card fade-in">
+          <div class="card-image-wrap">
+            <img src="s3-card-02.png" alt="Growth" class="card-image">
+            <div class="card-hover-overlay">
+              <p class="card-hover-text">The system by which an organization reliably attracts and converts new people into the funnel, whether that means customers, congregants, clients, or community members.</p>
+            </div>
+          </div>
           <div class="card-body">
             <h3 class="card-name">Growth</h3>
             <button class="btn-learn-more" onclick="openDrawer(1)">Learn More</button>
@@ -575,8 +632,13 @@
         </div>
 
         <!-- CARD 03 -->
-        <div class="system-card">
-          <img src="s3-card-03.png" alt="Service Delivery and Operations" class="card-image">
+        <div class="system-card fade-in">
+          <div class="card-image-wrap">
+            <img src="s3-card-03.png" alt="Service Delivery and Operations" class="card-image">
+            <div class="card-hover-overlay">
+              <p class="card-hover-text">The system by which an organization moves people through the funnel, delivering its core product, service, or experience consistently and at a level of quality that keeps people engaged.</p>
+            </div>
+          </div>
           <div class="card-body">
             <h3 class="card-name">Service Delivery and Operations</h3>
             <button class="btn-learn-more" onclick="openDrawer(2)">Learn More</button>
@@ -584,8 +646,13 @@
         </div>
 
         <!-- CARD 04 -->
-        <div class="system-card">
-          <img src="s3-card-04.png" alt="Money" class="card-image">
+        <div class="system-card fade-in">
+          <div class="card-image-wrap">
+            <img src="s3-card-04.png" alt="Money" class="card-image">
+            <div class="card-hover-overlay">
+              <p class="card-hover-text">The system by which an organization manages the flow of money in and out, maintains financial health, and makes informed decisions based on financial data.</p>
+            </div>
+          </div>
           <div class="card-body">
             <h3 class="card-name">Money</h3>
             <button class="btn-learn-more" onclick="openDrawer(3)">Learn More</button>
@@ -593,8 +660,13 @@
         </div>
 
         <!-- CARD 05 -->
-        <div class="system-card">
-          <img src="s3-card-05.png" alt="Administration" class="card-image">
+        <div class="system-card fade-in">
+          <div class="card-image-wrap">
+            <img src="s3-card-05.png" alt="Administration" class="card-image">
+            <div class="card-hover-overlay">
+              <p class="card-hover-text">The system by which an organization manages the internal infrastructure that keeps everything running behind the scenes, including information, compliance, legal, scheduling, and organizational knowledge.</p>
+            </div>
+          </div>
           <div class="card-body">
             <h3 class="card-name">Administration</h3>
             <button class="btn-learn-more" onclick="openDrawer(4)">Learn More</button>
@@ -602,8 +674,13 @@
         </div>
 
         <!-- CARD 06 -->
-        <div class="system-card">
-          <img src="s3-card-06.png" alt="People and Team" class="card-image">
+        <div class="system-card fade-in">
+          <div class="card-image-wrap">
+            <img src="s3-card-06.png" alt="People and Team" class="card-image">
+            <div class="card-hover-overlay">
+              <p class="card-hover-text">The system by which an organization recruits, develops, and retains the people responsible for carrying out its mission, building their capacity from entry level to strong performer to leader.</p>
+            </div>
+          </div>
           <div class="card-body">
             <h3 class="card-name">People and Team</h3>
             <button class="btn-learn-more" onclick="openDrawer(5)">Learn More</button>
@@ -616,7 +693,7 @@
     <!-- ============================================================
          SECTION 4: CLOSING LINE
          ============================================================ -->
-    <section class="closing-section">
+    <section class="closing-section fade-in">
       <p class="closing-text">Every organization has all six. The question is whether they are working.</p>
     </section>
 
@@ -1078,6 +1155,32 @@
         }
       }
     }
+
+
+    /* ------------------------------------------------------------------
+       SCROLL FADE-IN
+       Watches for elements entering the viewport and reveals them.
+       Cards stagger slightly so they don't all appear at once.
+       ------------------------------------------------------------------ */
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    /* Stagger each card by 100ms so they cascade in */
+    document.querySelectorAll('.system-card').forEach((card, i) => {
+      card.style.transitionDelay = `${i * 100}ms`;
+      fadeObserver.observe(card);
+    });
+
+    /* Observe non-card fade-in elements without stagger */
+    document.querySelectorAll('.fade-in:not(.system-card)').forEach(el => {
+      fadeObserver.observe(el);
+    });
 
   </script>
 
