@@ -11,33 +11,22 @@
 
     /* ============================================================
        CUSTOM PROPERTIES
-       Change colors or fonts here to update the whole page.
        ============================================================ */
     :root {
-      --color-bg:        #F5F0E8;  /* warm cream — page background */
-      --color-strip:     #EDE8DF;  /* slightly darker cream — foundation strip */
-      --color-text:      #1A1A1A;  /* near-black — primary text */
-      --color-secondary: #5C5550;  /* warm grey — body text, labels */
-      --color-accent:    #C4632A;  /* terracotta — labels, buttons, highlights */
-      --color-drawer:    #FFFFFF;  /* white — drawer background */
-      --color-border:    #D9D2C8;  /* hairline — dividers and card borders */
-
-      --font-display: 'Cormorant Garamond', serif;   /* headlines, system names */
-      --font-body:    'DM Sans', sans-serif; /* body, labels, UI text */
-
-      --radius-card:   12px;  /* card and image corners */
-      --radius-btn:     6px;  /* button corners */
-      --radius-drawer: 12px;  /* left corners of the drawer */
+      --color-bg:        #F5F0E8;
+      --color-strip:     #EDE8DF;
+      --color-text:      #1A1A1A;
+      --color-secondary: #5C5550;
+      --color-accent:    #C4632A;
+      --color-border:    #D9D2C8;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'DM Sans', sans-serif;
     }
 
     /* ============================================================
        RESET & BASE
        ============================================================ */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--color-bg);
@@ -48,15 +37,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    /* ============================================================
-       UTILITY — SMALL CAPS LABEL
-       Reused for section markers, card numbers, drawer section heads
-       ============================================================ */
     .label {
       font-family: var(--font-body);
       font-size: 11px;
@@ -67,22 +47,7 @@
     }
 
     /* ============================================================
-       PAGE BLUR
-       Applied to the page behind the drawer when it opens
-       ============================================================ */
-    #page-content {
-      transition: filter 350ms ease-out;
-    }
-    #page-content.blurred {
-      filter: blur(3px);
-      pointer-events: none;
-      user-select: none;
-    }
-
-
-    /* ============================================================
        NAVIGATION
-       Sticky top bar — sits above page-content so it doesn't blur
        ============================================================ */
     .site-nav {
       position: sticky;
@@ -139,8 +104,7 @@
     }
 
     /* ============================================================
-       SECTION 1 — HERO
-       Pure typography. Centered. The type is the visual.
+       HERO — Dark, centered, typographic
        ============================================================ */
     .hero {
       background: var(--color-text);
@@ -148,9 +112,6 @@
       border-bottom: 1px solid var(--color-border);
       text-align: center;
     }
-
-    /* Offset for sticky nav when scrolling to sections */
-    .systems-section { scroll-margin-top: 70px; }
 
     .hero-text-col {
       max-width: 860px;
@@ -214,201 +175,110 @@
       outline: none;
     }
 
-
     /* ============================================================
-       SECTION 2 — FOUNDATION STRIP
+       SYSTEM REVEAL SECTIONS
+       Each system gets its own full-height section.
+       The large watermark number sits behind the text.
        ============================================================ */
-    .foundation-strip {
-      background: var(--color-strip);
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-      padding: 52px 48px;
-      text-align: center;
-    }
-
-    .foundation-hierarchy {
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--color-text);
-      margin-bottom: 16px;
-    }
-
-    .foundation-body {
-      font-size: 15px;
-      color: var(--color-secondary);
-      max-width: 620px;
-      margin: 0 auto;
-      line-height: 1.75;
-    }
-
-
-    /* ============================================================
-       SECTION 3 — THE SIX SYSTEMS GRID
-       ============================================================ */
-    .systems-section {
-      max-width: 1280px;
-      margin: 0 auto;
+    .reveal-section {
+      min-height: 82vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 80px 48px;
-    }
-
-    .systems-header {
-      margin-bottom: 52px;
-    }
-
-    .systems-section-label {
-      display: block;
-      margin-bottom: 14px;
-    }
-
-    .systems-title {
-      font-family: var(--font-display);
-      font-size: clamp(36px, 4vw, 54px);
-      line-height: 1.05;
-      margin-bottom: 12px;
-    }
-
-    .systems-intro {
-      font-size: 16px;
-      color: var(--color-secondary);
-      line-height: 1.6;
-    }
-
-    .systems-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-    }
-
-
-    /* ============================================================
-       SYSTEM CARD
-       Portrait layout: image top, title, button. Clean and minimal.
-       ============================================================ */
-    .system-card {
-      border: 1px solid var(--color-border);
-      background: var(--color-bg);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-    }
-
-    .card-image {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-    }
-
-    .card-body {
-      padding: 24px 24px 28px;
+      border-bottom: 1px solid var(--color-border);
       text-align: center;
-    }
-
-    .card-name {
-      font-family: var(--font-display);
-      font-size: 20px;
-      line-height: 1.2;
-      margin-bottom: 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    /* Pill-shaped button on cards, matching Brené Brown style */
-    .system-card .btn-learn-more {
-      border-radius: 50px;
-      padding: 12px 36px;
-    }
-
-    /* ============================================================
-       CARD HOVER OVERLAY
-       Terracotta panel slides up over the image on hover,
-       revealing the system's one-line definition.
-       ============================================================ */
-    .card-image-wrap {
       position: relative;
       overflow: hidden;
     }
 
-    .card-hover-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(196, 99, 42, 0.93);
-      padding: 20px 22px;
-      transform: translateY(100%);
-      transition: transform 300ms ease-out;
+    /* Alternating background creates rhythm as you scroll */
+    .reveal-section:nth-child(even) {
+      background: var(--color-strip);
     }
 
-    .card-hover-text {
-      color: #FFFFFF;
-      font-size: 17px;
+    .reveal-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+    }
+
+    .reveal-num {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .reveal-name {
       font-family: var(--font-display);
-      font-weight: 600;
+      font-size: clamp(52px, 9vw, 112px);
+      color: var(--color-text);
+      line-height: 0.92;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .reveal-question {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3.5vw, 42px);
+      color: var(--color-secondary);
+      font-style: italic;
       line-height: 1.35;
     }
 
-    .system-card:hover .card-hover-overlay {
-      transform: translateY(0);
-    }
-
-    /* ============================================================
-       SCROLL FADE-IN
-       Elements start invisible and slide up as they enter view.
-       ============================================================ */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 600ms ease, transform 600ms ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Button: no fill at rest, fills with accent on hover */
-    .btn-learn-more {
-      display: inline-block;
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
+    /* Faint large number behind the content */
+    .reveal-watermark {
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: clamp(260px, 45vw, 580px);
+      font-weight: 700;
       color: var(--color-accent);
-      background: transparent;
-      border: 1px solid var(--color-accent);
-      border-radius: var(--radius-btn);
-      padding: 10px 20px;
-      cursor: pointer;
-      transition: background-color 200ms ease, color 200ms ease;
+      opacity: 0.05;
+      line-height: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -48%);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
     }
-
-    .btn-learn-more:hover,
-    .btn-learn-more:focus {
-      background-color: var(--color-accent);
-      color: #FFFFFF;
-      outline: none;
-    }
-
 
     /* ============================================================
-       SECTION 4 — CLOSING LINE
+       CLOSING SECTION
        ============================================================ */
     .closing-section {
-      border-top: 1px solid var(--color-border);
+      background: var(--color-text);
       padding: 100px 48px;
       text-align: center;
     }
 
     .closing-text {
       font-family: var(--font-display);
-      font-size: clamp(24px, 3vw, 42px);
+      font-size: clamp(26px, 3.5vw, 46px);
       line-height: 1.3;
       max-width: 820px;
-      margin: 0 auto;
+      margin: 0 auto 48px;
+      color: var(--color-bg);
     }
 
+    .btn-learn-more-pdf {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--color-bg);
+      background: transparent;
+      border: 1px solid rgba(245, 240, 232, 0.45);
+      border-radius: 50px;
+      padding: 16px 44px;
+      text-decoration: none;
+      transition: background-color 200ms ease, border-color 200ms ease;
+    }
+
+    .btn-learn-more-pdf:hover {
+      background-color: rgba(245, 240, 232, 0.12);
+      border-color: var(--color-bg);
+    }
 
     /* ============================================================
        RANKING CTA STRIP
@@ -417,6 +287,7 @@
       background: var(--color-text);
       padding: 64px 48px;
       text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     .ranking-cta-text {
@@ -431,7 +302,7 @@
       font-size: 15px;
       font-weight: 500;
       letter-spacing: 0.04em;
-      color: var(--color-white);
+      color: #FFFFFF;
       background: var(--color-accent);
       border-radius: 50px;
       padding: 16px 40px;
@@ -441,7 +312,7 @@
     .btn-ranking:hover { opacity: 0.85; }
 
     /* ============================================================
-       SECTION 5 — FOOTER
+       FOOTER
        ============================================================ */
     footer {
       border-top: 1px solid var(--color-border);
@@ -456,192 +327,34 @@
       color: var(--color-secondary);
     }
 
-
     /* ============================================================
-       OVERLAY
-       Semi-transparent layer that sits behind the drawer.
-       Click it to close.
+       SCROLL FADE-IN
        ============================================================ */
-    #overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(26, 26, 26, 0.25);
+    .fade-in {
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 350ms ease-out;
-      z-index: 100;
-      cursor: pointer;
+      transform: translateY(24px);
+      transition: opacity 700ms ease, transform 700ms ease;
     }
 
-    #overlay.active {
+    .fade-in.visible {
       opacity: 1;
-      pointer-events: all;
+      transform: translateY(0);
     }
-
 
     /* ============================================================
-       DRAWER
-       Slides in from the right. 520px on desktop, full-width mobile.
-       Content is populated by JavaScript based on which card was clicked.
-       ============================================================ */
-    #drawer {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 520px;
-      height: 100vh;
-      background: var(--color-drawer);
-      border-left: 1px solid var(--color-border);
-      border-radius: var(--radius-drawer) 0 0 var(--radius-drawer);
-      transform: translateX(100%);
-      transition: transform 350ms ease-out;
-      z-index: 101;
-      overflow-y: auto;
-    }
-
-    #drawer.open {
-      transform: translateX(0);
-    }
-
-    /* Sticky bar at the top of the drawer with the close button */
-    .drawer-topbar {
-      position: sticky;
-      top: 0;
-      background: var(--color-drawer);
-      padding: 18px 28px 14px;
-      display: flex;
-      justify-content: flex-end;
-      border-bottom: 1px solid var(--color-border);
-      z-index: 1;
-    }
-
-    .drawer-close-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-      line-height: 1;
-      color: var(--color-secondary);
-      padding: 4px 8px;
-      font-family: var(--font-body);
-      transition: color 150ms ease;
-    }
-
-    .drawer-close-btn:hover {
-      color: var(--color-text);
-    }
-
-    /* The scrollable content area inside the drawer */
-    .drawer-inner {
-      padding: 32px 40px 64px;
-    }
-
-    .drawer-system-num {
-      display: block;
-      margin-bottom: 12px;
-    }
-
-    .drawer-name {
-      font-family: var(--font-display);
-      font-size: 34px;
-      line-height: 1.1;
-      margin-bottom: 16px;
-      color: var(--color-text);
-    }
-
-    .drawer-definition {
-      font-size: 15px;
-      font-style: italic;
-      color: var(--color-secondary);
-      line-height: 1.75;
-      padding-bottom: 28px;
-      margin-bottom: 28px;
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    /* Each of the six content sections in the drawer */
-    .drawer-section {
-      margin-bottom: 28px;
-    }
-
-    .drawer-section-label {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--color-accent);
-      margin-bottom: 8px;
-    }
-
-    .drawer-section hr {
-      border: none;
-      border-top: 1px solid var(--color-border);
-      margin-bottom: 14px;
-    }
-
-    .drawer-section ul {
-      list-style: disc;
-      padding-left: 20px;
-    }
-
-    .drawer-section li {
-      font-size: 14px;
-      color: var(--color-secondary);
-      line-height: 1.65;
-      margin-bottom: 6px;
-    }
-
-    .drawer-section p {
-      font-size: 14px;
-      color: var(--color-secondary);
-      line-height: 1.65;
-      margin-bottom: 8px;
-    }
-
-    /* Bold subcategory labels in the Artifacts section */
-    .drawer-section p strong {
-      color: var(--color-text);
-      font-weight: 500;
-    }
-
-
-    /* ============================================================
-       RESPONSIVE — TABLET (768px)
+       RESPONSIVE
        ============================================================ */
     @media (max-width: 768px) {
-      .site-nav {
-        padding: 0 24px;
-      }
+      .site-nav { padding: 0 24px; }
+      .nav-links { gap: 20px; }
+      .nav-links .nav-text-link { display: none; }
 
-      .nav-links {
-        gap: 20px;
-      }
+      .hero { padding: 52px 24px 60px; }
 
-      .nav-links .nav-text-link {
-        display: none;
-      }
+      .reveal-section { padding: 60px 24px; min-height: 70vh; }
 
-      .hero {
-        padding: 52px 24px 60px;
-      }
-
-      .foundation-strip {
-        padding: 40px 24px;
-      }
-
-      .systems-section {
-        padding: 60px 24px;
-      }
-
-      .systems-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .closing-section {
-        padding: 72px 24px;
-      }
+      .closing-section { padding: 72px 24px; }
+      .ranking-cta { padding: 48px 24px; }
 
       footer {
         padding: 24px;
@@ -651,21 +364,8 @@
       }
     }
 
-    /* ============================================================
-       RESPONSIVE — MOBILE (480px)
-       ============================================================ */
     @media (max-width: 480px) {
-      .systems-grid {
-        grid-template-columns: 1fr;
-      }
-
-      #drawer {
-        width: 100%;
-      }
-
-      .drawer-inner {
-        padding: 24px 24px 48px;
-      }
+      .reveal-section { min-height: 60vh; }
     }
 
   </style>
@@ -674,24 +374,19 @@
 
   <!-- ================================================================
        NAVIGATION
-       Outside page-content so it stays sharp when the drawer opens
        ================================================================ -->
   <nav class="site-nav">
     <a href="#" class="nav-brand">S&#179;</a>
     <ul class="nav-links">
-      <li><a href="#" onclick="document.querySelector('.systems-section').scrollIntoView({behavior:'smooth'}); return false;" class="nav-text-link">The Six Systems</a></li>
+      <li><a href="#systems" class="nav-text-link">The Six Systems</a></li>
       <li><a href="s3-ranking.html" class="nav-cta">Rank Your Systems</a></li>
     </ul>
   </nav>
 
-  <!-- ================================================================
-       PAGE CONTENT
-       This entire div blurs when the drawer opens.
-       ================================================================ -->
   <div id="page-content">
 
     <!-- ============================================================
-         SECTION 1: HERO
+         HERO
          ============================================================ -->
     <section class="hero">
       <div class="hero-text-col">
@@ -701,115 +396,79 @@
           <span class="hero-s3">S&#179;</span>
           <span class="hero-subtitle">The Solid Six Systems</span>
         </h1>
-        <button class="btn-hero" onclick="document.querySelector('.systems-section').scrollIntoView({behavior:'smooth'})">Explore the Framework</button>
+        <button class="btn-hero" onclick="document.getElementById('systems').scrollIntoView({behavior:'smooth'})">Explore the Framework</button>
       </div>
     </section>
 
     <!-- ============================================================
-         SECTION 2: THE SIX SYSTEMS GRID
+         THE SIX SYSTEMS — Scroll reveal
+         Each section reveals one system and its core question.
          ============================================================ -->
-    <section class="systems-section">
+    <div id="systems">
 
-      <div class="systems-header fade-in">
-        <span class="label systems-section-label">EXPLORE</span>
-        <h2 class="systems-title">The Six Systems</h2>
-        <p class="systems-intro">Here are the six systems that make or break your business.</p>
-      </div>
-
-      <div class="systems-grid">
-
-        <!-- CARD 01 -->
-        <div class="system-card fade-in">
-          <div class="card-image-wrap">
-            <img src="s3-card-01.png" alt="Strategic Management" class="card-image">
-            <div class="card-hover-overlay">
-              <p class="card-hover-text">Where is our company going and how will we get there?</p>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-name">Strategic Management</h3>
-            <button class="btn-learn-more" onclick="openDrawer(0)">Learn More</button>
-          </div>
+      <section class="reveal-section fade-in">
+        <div class="reveal-inner">
+          <span class="label reveal-num">01</span>
+          <h2 class="reveal-name">Strategic Management</h2>
+          <p class="reveal-question">Where is our company going and how will we get there?</p>
         </div>
+        <span class="reveal-watermark" aria-hidden="true">01</span>
+      </section>
 
-        <!-- CARD 02 -->
-        <div class="system-card fade-in">
-          <div class="card-image-wrap">
-            <img src="s3-card-02.png" alt="Growth" class="card-image">
-            <div class="card-hover-overlay">
-              <p class="card-hover-text">How do we get new clients?</p>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-name">Growth</h3>
-            <button class="btn-learn-more" onclick="openDrawer(1)">Learn More</button>
-          </div>
+      <section class="reveal-section fade-in">
+        <div class="reveal-inner">
+          <span class="label reveal-num">02</span>
+          <h2 class="reveal-name">Growth</h2>
+          <p class="reveal-question">How do we get new clients?</p>
         </div>
+        <span class="reveal-watermark" aria-hidden="true">02</span>
+      </section>
 
-        <!-- CARD 03 -->
-        <div class="system-card fade-in">
-          <div class="card-image-wrap">
-            <img src="s3-card-03.png" alt="Service Delivery and Operations" class="card-image">
-            <div class="card-hover-overlay">
-              <p class="card-hover-text">How do we deliver high quality products and services?</p>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-name">Service Delivery and Operations</h3>
-            <button class="btn-learn-more" onclick="openDrawer(2)">Learn More</button>
-          </div>
+      <section class="reveal-section fade-in">
+        <div class="reveal-inner">
+          <span class="label reveal-num">03</span>
+          <h2 class="reveal-name">Service Delivery and Operations</h2>
+          <p class="reveal-question">How do we deliver high quality products and services?</p>
         </div>
+        <span class="reveal-watermark" aria-hidden="true">03</span>
+      </section>
 
-        <!-- CARD 04 -->
-        <div class="system-card fade-in">
-          <div class="card-image-wrap">
-            <img src="s3-card-04.png" alt="Money" class="card-image">
-            <div class="card-hover-overlay">
-              <p class="card-hover-text">How do we manage our cash flow and make good financial decisions?</p>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-name">Money</h3>
-            <button class="btn-learn-more" onclick="openDrawer(3)">Learn More</button>
-          </div>
+      <section class="reveal-section fade-in">
+        <div class="reveal-inner">
+          <span class="label reveal-num">04</span>
+          <h2 class="reveal-name">Money</h2>
+          <p class="reveal-question">How do we manage our cash flow and make good financial decisions?</p>
         </div>
+        <span class="reveal-watermark" aria-hidden="true">04</span>
+      </section>
 
-        <!-- CARD 05 -->
-        <div class="system-card fade-in">
-          <div class="card-image-wrap">
-            <img src="s3-card-05.png" alt="Administration" class="card-image">
-            <div class="card-hover-overlay">
-              <p class="card-hover-text">What is the internal infrastructure for running everything behind the scenes?</p>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-name">Administration</h3>
-            <button class="btn-learn-more" onclick="openDrawer(4)">Learn More</button>
-          </div>
+      <section class="reveal-section fade-in">
+        <div class="reveal-inner">
+          <span class="label reveal-num">05</span>
+          <h2 class="reveal-name">Administration</h2>
+          <p class="reveal-question">What is the internal infrastructure for running everything behind the scenes?</p>
         </div>
+        <span class="reveal-watermark" aria-hidden="true">05</span>
+      </section>
 
-        <!-- CARD 06 -->
-        <div class="system-card fade-in">
-          <div class="card-image-wrap">
-            <img src="s3-card-06.png" alt="People and Team" class="card-image">
-            <div class="card-hover-overlay">
-              <p class="card-hover-text">How do we recruit and develop a high quality team?</p>
-            </div>
-          </div>
-          <div class="card-body">
-            <h3 class="card-name">People and Team</h3>
-            <button class="btn-learn-more" onclick="openDrawer(5)">Learn More</button>
-          </div>
+      <section class="reveal-section fade-in">
+        <div class="reveal-inner">
+          <span class="label reveal-num">06</span>
+          <h2 class="reveal-name">People and Team</h2>
+          <p class="reveal-question">How do we recruit and develop a high quality team?</p>
         </div>
+        <span class="reveal-watermark" aria-hidden="true">06</span>
+      </section>
 
-      </div><!-- end .systems-grid -->
-    </section>
+    </div><!-- end #systems -->
 
     <!-- ============================================================
-         SECTION 4: CLOSING LINE
+         CLOSING + PDF CTA
+         Replace href="#" with your actual PDF link when ready
          ============================================================ -->
     <section class="closing-section fade-in">
       <p class="closing-text">Every organization has all six. The question is whether they are working.</p>
+      <a href="#" class="btn-learn-more-pdf">Learn More &#8594;</a>
     </section>
 
     <!-- ============================================================
@@ -821,7 +480,7 @@
     </section>
 
     <!-- ============================================================
-         SECTION 5: FOOTER
+         FOOTER
          ============================================================ -->
     <footer>
       <span>S&#179;: The Solid Six Systems</span>
@@ -831,459 +490,12 @@
   </div><!-- end #page-content -->
 
 
-  <!-- ================================================================
-       OVERLAY — click to close the drawer
-       ================================================================ -->
-  <div id="overlay" onclick="closeDrawer()" aria-hidden="true"></div>
-
-
-  <!-- ================================================================
-       DRAWER — slides in from the right
-       Content is populated by openDrawer(index) in JavaScript below
-       ================================================================ -->
-  <div id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-name-heading" aria-hidden="true">
-    <div class="drawer-topbar">
-      <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="Close">&#x2715;</button>
-    </div>
-    <div class="drawer-inner" id="drawer-content">
-      <!-- populated by JavaScript -->
-    </div>
-  </div>
-
-
-  <!-- ================================================================
-       JAVASCRIPT
-       ================================================================ -->
   <script>
 
     /* ------------------------------------------------------------------
-       SYSTEM DATA
-       To update content, edit the text inside this array.
-       Each system maps directly to one card and one drawer panel.
-       ------------------------------------------------------------------ */
-    const systems = [
-
-      /* ---- 01: STRATEGIC MANAGEMENT ---- */
-      {
-        number: '01',
-        name: 'Strategic Management',
-        definition: 'The system by which an organization establishes where it is going, why it exists, and how it will measure progress toward its goals.',
-        contains: [
-          'Mission, vision, and values',
-          'Short and long-term goal setting',
-          'Strategy development',
-          'Success metrics',
-          'Team development planning',
-          'Research and development',
-          'Culture and community norms',
-          'Internal communication of direction',
-          'Regular review and adjustment cadence'
-        ],
-        healthy: [
-          'Leadership has a clear shared picture of where the org is going',
-          'Goals are specific, time-bound, and known across the team',
-          'Progress is measured consistently and reviewed regularly',
-          'Team development is tied directly to strategic priorities',
-          'The org reviews progress regularly and adjusts course intentionally before small problems become large ones',
-          'Culture artifacts are documented, visible, and actively referenced'
-        ],
-        underdeveloped: [
-          'Vision exists but only in the leader\'s head',
-          'Goals are set and never revisited',
-          'Team is working hard but in different directions',
-          'No connection between what we are building and who we are developing',
-          'Every quarter feels like starting over',
-          'Culture is assumed rather than defined'
-        ],
-        metrics: [
-          'Goal attainment rate',
-          'Cadence of strategic reviews',
-          'Team development plan completion rate',
-          'Metrics tracking consistency'
-        ],
-        artifacts: [
-          { label: 'Direction and Vision', items: 'mission and vision statement, values document, strategic plan' },
-          { label: 'Goal Setting and Tracking', items: 'goal setting template, metrics dashboard, quarterly review template' },
-          { label: 'Research and Development', items: 'market or community research report, innovation pipeline document, R&D review cadence' },
-          { label: 'Team Development', items: 'team development plan, individual growth plan template, succession planning document' },
-          { label: 'Internal Communication', items: 'town hall agenda template, strategy communication one-pager, decision-making framework' },
-          { label: 'Culture', items: 'community agreement, norms and expectations document' }
-        ],
-        roles: 'Executive team, department heads, board members, chief of staff'
-      },
-
-      /* ---- 02: GROWTH ---- */
-      {
-        number: '02',
-        name: 'Growth',
-        definition: 'The system by which an organization reliably attracts and converts new people into the funnel, whether that means customers, congregants, clients, or community members.',
-        contains: [
-          'Awareness building — how people find out you exist',
-          'Lead generation and outreach',
-          'Nurture and follow-up after first contact',
-          'Conversion process — how someone moves from interested to committed',
-          'Entry-level handoff into Service Delivery'
-        ],
-        healthy: [
-          'New people are consistently entering the organization',
-          'There is a clear documented path from first contact to full participation',
-          'Growth is not dependent on one person or one channel',
-          'Follow-up happens systematically, not when someone remembers',
-          'New people are handed off cleanly into the delivery experience'
-        ],
-        underdeveloped: [
-          'Growth is personality-dependent and stops when the leader stops hustling',
-          'Visitors or leads come in but disappear without follow-up',
-          'No clear on-ramp exists for someone new',
-          'The org has no repeatable conversion process',
-          'Growth depends on sporadic events or individual initiative rather than a documented repeatable process'
-        ],
-        metrics: [
-          'Conversion rate — interested to committed',
-          'Cost or effort per new participant',
-          'Volume of new people entering the funnel per period',
-          'Source tracking — where are new people coming from'
-        ],
-        artifacts: [
-          { label: 'Awareness and Outreach', items: 'social media content calendar, email marketing sequences, outreach or campaign plan' },
-          { label: 'Lead Generation and Tracking', items: 'contact capture form or visitor card, CRM or contact tracking system, lead source tracking log' },
-          { label: 'Conversion Process', items: 'discovery call framework, follow-up sequence template, conversion pathway document' },
-          { label: 'Entry Onboarding', items: 'welcome email or letter template, first step checklist, orientation agenda' }
-        ],
-        roles: 'Sales and marketing team, business development team, brand and communications team'
-      },
-
-      /* ---- 03: SERVICE DELIVERY AND OPERATIONS ---- */
-      {
-        number: '03',
-        name: 'Service Delivery and Operations',
-        definition: 'The system by which an organization moves people through the funnel, delivering its core product, service, or experience consistently and at a level of quality that keeps people engaged.',
-        contains: [
-          'Core delivery process — how the main thing gets done',
-          'Client or member management — records, communication, care',
-          'Onboarding into delivery',
-          'Quality standards and quality control',
-          'Project management',
-          'Feedback collection from the people being served',
-          'Continuous improvement process'
-        ],
-        healthy: [
-          'The core experience is delivered consistently regardless of who is running it',
-          'People feel known, cared for, and served well',
-          'Quality does not degrade as volume grows',
-          'Feedback is collected and actually used to improve',
-          'The org knows when someone is disengaging before they leave'
-        ],
-        underdeveloped: [
-          'Quality depends entirely on who shows up that day',
-          'People fall through the cracks especially as the org grows',
-          'No mechanism exists to know if someone is struggling or disengaging',
-          'Feedback is collected but never acted on',
-          'The delivery experience varies wildly from one instance to the next',
-          'Retention is low but the org keeps blaming Growth',
-          'No standard exists against which delivery can be measured'
-        ],
-        metrics: [
-          'Retention rate',
-          'Satisfaction or engagement scores',
-          'Re-engagement rate — people who lapsed and returned'
-        ],
-        artifacts: [
-          { label: 'Core Delivery', items: 'SOPs, program curriculum and materials' },
-          { label: 'Client and Member Management', items: 'CRM or member database, communication templates, care and follow-up protocol' },
-          { label: 'Quality Control', items: 'feedback survey, observation or audit rubric, quality review calendar' },
-          { label: 'Project Management', items: 'project plan template, project tracking dashboard, project debrief template' },
-          { label: 'Continuous Improvement', items: 'feedback analysis template, improvement action plan, debrief document' },
-          { label: 'Retention', items: 're-engagement outreach template, milestone recognition process, exit interview or offboarding survey' }
-        ],
-        roles: 'Operations team, project managers, customer success team, account managers'
-      },
-
-      /* ---- 04: MONEY ---- */
-      {
-        number: '04',
-        name: 'Money',
-        definition: 'The system by which an organization manages the flow of money in and out, maintains financial health, and makes informed decisions based on financial data.',
-        contains: [
-          'Revenue or income tracking',
-          'Expense management',
-          'Budgeting and financial planning',
-          'Financial reporting and review cadence',
-          'Cash flow forecasting',
-          'Payroll and compensation',
-          'Financial compliance and accountability',
-          'Asset management — financial reserves, investments'
-        ],
-        healthy: [
-          'Leadership knows at any given moment where the org stands financially',
-          'Budget reflects actual strategic priorities',
-          'Financial reviews happen on a regular predictable cadence',
-          'The org can plan ahead rather than just react to what is in the account',
-          'Financial decisions are data-driven, not gut-driven'
-        ],
-        underdeveloped: [
-          'No one really knows where the money is until something goes wrong',
-          'Budget exists on paper but does not reflect reality',
-          'Financial decisions are made reactively',
-          'One person holds all financial knowledge and access',
-          'The org confuses growth — people in the funnel — with financial health'
-        ],
-        metrics: [
-          'Monthly revenue vs expenses',
-          'Cash flow runway — how long can the org operate on current reserves',
-          'Budget variance — planned vs actual spending',
-          'Revenue growth rate'
-        ],
-        artifacts: [
-          { label: 'Budgeting and Planning', items: 'annual budget template, cash flow forecast' },
-          { label: 'Income and Expense Tracking', items: 'chart of accounts, expense tracking log' },
-          { label: 'Financial Reporting', items: 'monthly financial report template, profit and loss statement' },
-          { label: 'Payroll and Compensation', items: 'payroll schedule, compensation structure document' },
-          { label: 'Asset Management', items: 'asset inventory log, financial reserves policy' }
-        ],
-        roles: 'Finance team, accounting team, payroll team, executive team'
-      },
-
-      /* ---- 05: ADMINISTRATION ---- */
-      {
-        number: '05',
-        name: 'Administration',
-        definition: 'The system by which an organization manages the internal infrastructure that keeps everything running behind the scenes, including information, compliance, legal, scheduling, and organizational knowledge.',
-        contains: [
-          'Document and records management',
-          'Knowledge management — capturing institutional knowledge',
-          'Calendar and scheduling management',
-          'Legal and compliance',
-          'HR administration',
-          'Software, tools, and technology management',
-          'Risk management and contingency planning',
-          'Physical asset management'
-        ],
-        healthy: [
-          'Critical information is documented, stored, and accessible to the right people',
-          'The org is not dependent on one person\'s memory to function',
-          'Legal and compliance requirements are met proactively, not reactively',
-          'Administrative processes actively support the flow and quality of work for both the team and the people being served',
-          'When someone leaves, their knowledge does not leave with them'
-        ],
-        underdeveloped: [
-          'Institutional knowledge lives in one person\'s head',
-          'Contracts, compliance, and legal requirements are addressed only when something goes wrong',
-          'Scheduling and coordination are constant sources of friction',
-          'Tools and technology are adopted randomly without a clear strategy',
-          'The org regularly reinvents the wheel because nothing is documented',
-          'Administrative processes create friction, slow down delivery, or negatively impact the experience of staff, volunteers, or the people being served'
-        ],
-        metrics: [
-          'Compliance status — are all legal and regulatory requirements current',
-          'Tool adoption rate — are people actually using the systems in place'
-        ],
-        artifacts: [
-          { label: 'Document and Records Management', items: 'shared file system or folder structure, document naming and storage protocol' },
-          { label: 'Knowledge Management', items: 'standard operating procedures library, offboarding knowledge transfer template' },
-          { label: 'Legal and Compliance', items: 'contracts and agreement templates, compliance checklist' },
-          { label: 'HR Administration', items: 'employee or volunteer handbook, leave and absence policy' },
-          { label: 'Scheduling and Coordination', items: 'master calendar, meeting cadence document' },
-          { label: 'Tools and Technology', items: 'tech stack document, tool adoption and training guide' },
-          { label: 'Risk Management', items: 'contingency plan, incident response protocol' },
-          { label: 'Physical Asset Management', items: 'facilities management log, equipment inventory' }
-        ],
-        roles: 'Administrative team, HR team, IT and technology team, legal and compliance team'
-      },
-
-      /* ---- 06: PEOPLE AND TEAM ---- */
-      {
-        number: '06',
-        name: 'People and Team',
-        definition: 'The system by which an organization recruits, develops, and retains the people responsible for carrying out its mission, building their capacity from entry level to strong performer to leader.',
-        contains: [
-          'Recruitment and selection process',
-          'Onboarding and induction',
-          'Role clarity and expectations',
-          'Training and skill development',
-          'Leadership development and succession pipeline',
-          'Performance management and feedback',
-          'Recognition and engagement',
-          'Off-boarding process'
-        ],
-        healthy: [
-          'The right people are in the right roles with the clarity and support to succeed',
-          'There is a visible pathway from new team member to strong performer to leader',
-          'Development is intentional and tied to both individual growth and organizational need',
-          'Leadership is being grown from within, not just hired from outside',
-          'People feel seen, developed, and invested in',
-          'The org rarely loses people to burnout or disengagement'
-        ],
-        underdeveloped: [
-          'Roles exist but expectations are unclear or inconsistently communicated',
-          'New people are thrown in without adequate orientation or support',
-          'Development happens informally or not at all',
-          'The same people carry everything because no one else has been developed to help',
-          'Leadership pipeline is empty, succession is never discussed',
-          'High standards exist with little support to meet them',
-          'People leave not because of pay but because of lack of growth or recognition'
-        ],
-        metrics: [
-          'Retention rate of staff and volunteers',
-          'Internal promotion rate — how often are leaders grown from within',
-          'Time to full contribution for new team members',
-          'Training completion and application rate',
-          'Engagement or satisfaction scores among team members'
-        ],
-        artifacts: [
-          { label: 'Recruitment', items: 'job description template, interview rubric, interview agenda and question guide' },
-          { label: 'Onboarding', items: 'onboarding checklist, orientation guide' },
-          { label: 'Role Clarity', items: 'role description document, org chart, responsibility matrix' },
-          { label: 'Training and Skill Development', items: 'training curriculum, skills assessment tool' },
-          { label: 'Leadership Development', items: 'leadership development pathway, role-based succession plan' },
-          { label: 'Performance Management', items: 'performance review template, feedback guide' },
-          { label: 'Recognition and Engagement', items: 'recognition program framework, engagement survey' },
-          { label: 'Off-boarding', items: 'exit interview template, knowledge transfer checklist' }
-        ],
-        roles: 'HR team, people and culture team, training and development team, executive team'
-      }
-
-    ]; // end systems array
-
-
-    /* ------------------------------------------------------------------
-       DRAWER — OPEN
-       Populates content from the systems array and animates in.
-       ------------------------------------------------------------------ */
-    const drawer    = document.getElementById('drawer');
-    const overlay   = document.getElementById('overlay');
-    const drawerContent = document.getElementById('drawer-content');
-    const pageWrap  = document.getElementById('page-content');
-
-    function openDrawer(index) {
-      const s = systems[index];
-
-      /* Build bullet list HTML from an array of strings */
-      const listHtml = items => items.map(i => `<li>${i}</li>`).join('');
-
-      /* Build artifacts HTML: bold subcategory label + items on each line */
-      const artifactsHtml = s.artifacts
-        .map(a => `<p><strong>${a.label}:</strong> ${a.items}</p>`)
-        .join('');
-
-      drawerContent.innerHTML = `
-        <span class="label drawer-system-num">SYSTEM ${s.number}</span>
-        <h2 class="drawer-name" id="drawer-name-heading">${s.name}</h2>
-        <p class="drawer-definition">${s.definition}</p>
-
-        <div class="drawer-section">
-          <div class="drawer-section-label">WHAT IT CONTAINS</div>
-          <hr>
-          <ul>${listHtml(s.contains)}</ul>
-        </div>
-
-        <div class="drawer-section">
-          <div class="drawer-section-label">HEALTHY LOOKS LIKE</div>
-          <hr>
-          <ul>${listHtml(s.healthy)}</ul>
-        </div>
-
-        <div class="drawer-section">
-          <div class="drawer-section-label">UNDERDEVELOPED LOOKS LIKE</div>
-          <hr>
-          <ul>${listHtml(s.underdeveloped)}</ul>
-        </div>
-
-        <div class="drawer-section">
-          <div class="drawer-section-label">KEY METRICS</div>
-          <hr>
-          <ul>${listHtml(s.metrics)}</ul>
-        </div>
-
-        <div class="drawer-section">
-          <div class="drawer-section-label">ARTIFACTS AND COMPONENTS</div>
-          <hr>
-          ${artifactsHtml}
-        </div>
-
-        <div class="drawer-section">
-          <div class="drawer-section-label">COMMON ROLES INCLUDE</div>
-          <hr>
-          <p>${s.roles}</p>
-        </div>
-      `;
-
-      /* Reset drawer scroll to top */
-      drawer.scrollTop = 0;
-
-      /* Activate open state */
-      drawer.classList.add('open');
-      overlay.classList.add('active');
-      pageWrap.classList.add('blurred');
-      drawer.setAttribute('aria-hidden', 'false');
-
-      /* Move keyboard focus to the close button */
-      const closeBtn = drawer.querySelector('.drawer-close-btn');
-      if (closeBtn) closeBtn.focus();
-
-      /* Activate focus trap */
-      drawer.addEventListener('keydown', trapFocus);
-    }
-
-
-    /* ------------------------------------------------------------------
-       DRAWER — CLOSE
-       ------------------------------------------------------------------ */
-    function closeDrawer() {
-      drawer.classList.remove('open');
-      overlay.classList.remove('active');
-      pageWrap.classList.remove('blurred');
-      drawer.setAttribute('aria-hidden', 'true');
-      drawer.removeEventListener('keydown', trapFocus);
-    }
-
-
-    /* ------------------------------------------------------------------
-       KEYBOARD — ESC closes the drawer
-       ------------------------------------------------------------------ */
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && drawer.classList.contains('open')) {
-        closeDrawer();
-      }
-    });
-
-
-    /* ------------------------------------------------------------------
-       FOCUS TRAP
-       Keeps Tab and Shift+Tab cycling within the drawer while it is open.
-       ------------------------------------------------------------------ */
-    function trapFocus(e) {
-      if (e.key !== 'Tab') return;
-
-      const focusable = Array.from(
-        drawer.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        )
-      ).filter(el => !el.disabled);
-
-      if (!focusable.length) return;
-
-      const first = focusable[0];
-      const last  = focusable[focusable.length - 1];
-
-      if (e.shiftKey) {
-        if (document.activeElement === first) {
-          last.focus();
-          e.preventDefault();
-        }
-      } else {
-        if (document.activeElement === last) {
-          first.focus();
-          e.preventDefault();
-        }
-      }
-    }
-
-
-    /* ------------------------------------------------------------------
        SCROLL FADE-IN
-       Watches for elements entering the viewport and reveals them.
-       Cards stagger slightly so they don't all appear at once.
+       Each reveal section and major element fades up as it enters view.
+       Sections stagger slightly so they don't all fire at once.
        ------------------------------------------------------------------ */
     const fadeObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1292,16 +504,10 @@
           fadeObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.12 });
 
-    /* Stagger each card by 100ms so they cascade in */
-    document.querySelectorAll('.system-card').forEach((card, i) => {
-      card.style.transitionDelay = `${i * 100}ms`;
-      fadeObserver.observe(card);
-    });
-
-    /* Observe non-card fade-in elements without stagger */
-    document.querySelectorAll('.fade-in:not(.system-card)').forEach(el => {
+    document.querySelectorAll('.fade-in').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 60}ms`;
       fadeObserver.observe(el);
     });
 
