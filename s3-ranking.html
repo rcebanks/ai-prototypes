@@ -237,43 +237,72 @@
       font-family: var(--font-display);
       font-size: clamp(28px, 5vw, 42px);
       line-height: 1.1;
-      margin-bottom: 28px;
+      margin-bottom: 10px;
     }
 
-    /* Result zone cards */
-    .result-zone {
-      border-radius: 10px;
-      border: 1px solid var(--color-border);
-      padding: 20px 24px;
-      margin-bottom: 14px;
+    .results-intro {
+      font-size: 15px;
+      color: var(--color-secondary);
+      line-height: 1.7;
+      margin-bottom: 40px;
     }
 
-    .result-zone.strength  { background: #F4FAF4; border-color: #B5D9BA; }
-    .result-zone.developing { background: #FAF8F4; border-color: var(--color-border); }
-    .result-zone.focus     { background: #FDF6F0; border-color: #E8C4A8; }
+    /* Each of the two focus systems */
+    .focus-system {
+      padding: 32px 0;
+      border-top: 1px solid var(--color-border);
+    }
 
-    .result-zone-label {
+    .focus-rank {
       font-size: 11px;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      margin-bottom: 6px;
-    }
-    .result-zone.strength  .result-zone-label { color: var(--color-strength); }
-    .result-zone.developing .result-zone-label { color: var(--color-secondary); }
-    .result-zone.focus     .result-zone-label { color: var(--color-accent); }
-
-    .result-zone-names {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 6px;
+      color: var(--color-accent);
+      margin-bottom: 8px;
     }
 
-    .result-zone-note {
-      font-size: 13px;
+    .focus-name {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4vw, 36px);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .focus-section-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-secondary);
+      margin-bottom: 10px;
+    }
+
+    .focus-bullets {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .focus-bullets li {
+      font-size: 14px;
       color: var(--color-secondary);
       line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .focus-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 5px;
+      height: 5px;
+      background: var(--color-accent);
+      border-radius: 50%;
     }
 
     /* Result CTA buttons */
@@ -425,24 +454,11 @@
          RESULTS — revealed after clicking See My Results
          ============================================================ -->
     <div id="results">
-      <h2 class="results-title">Here&#8217;s where you stand.</h2>
+      <h2 class="results-title">Here&#8217;s where to start.</h2>
+      <p class="results-intro">Your two lowest-ranked systems are detailed below. See if any of this sounds familiar.</p>
 
-      <div class="result-zone strength">
-        <div class="result-zone-label">STRENGTH ZONE &#8212; Ranks 1 &amp; 2</div>
-        <div class="result-zone-names" id="zone-strength"></div>
-        <div class="result-zone-note">These are working. Protect and document them so they hold as you grow.</div>
-      </div>
-
-      <div class="result-zone developing">
-        <div class="result-zone-label">DEVELOPING &#8212; Ranks 3 &amp; 4</div>
-        <div class="result-zone-names" id="zone-developing"></div>
-        <div class="result-zone-note">Present but inconsistent. A little intentional structure goes a long way here.</div>
-      </div>
-
-      <div class="result-zone focus">
-        <div class="result-zone-label">FOCUS ZONE &#8212; Ranks 5 &amp; 6</div>
-        <div class="result-zone-names" id="zone-focus"></div>
-        <div class="result-zone-note">These are costing you the most right now. This is where to start.</div>
+      <div id="focus-items">
+        <!-- populated by JavaScript based on ranking -->
       </div>
 
       <div class="results-footer">
@@ -541,14 +557,79 @@
     });
 
     /* ------------------------------------------------------------------
+       SYSTEM DATA
+       Underdeveloped bullets for each system — shown in results.
+       ------------------------------------------------------------------ */
+    const systemData = {
+      'Strategic Management': [
+        'Vision exists but only in the leader\'s head',
+        'Goals are set and never revisited',
+        'Team is working hard but in different directions',
+        'No connection between what we are building and who we are developing',
+        'Every quarter feels like starting over',
+        'Culture is assumed rather than defined'
+      ],
+      'Growth': [
+        'Growth is personality-dependent and stops when the leader stops hustling',
+        'Visitors or leads come in but disappear without follow-up',
+        'No clear on-ramp exists for someone new',
+        'The org has no repeatable conversion process',
+        'Growth depends on sporadic events or individual initiative rather than a documented repeatable process'
+      ],
+      'Service Delivery and Operations': [
+        'Quality depends entirely on who shows up that day',
+        'People fall through the cracks especially as the org grows',
+        'No mechanism exists to know if someone is struggling or disengaging',
+        'Feedback is collected but never acted on',
+        'The delivery experience varies wildly from one instance to the next',
+        'Retention is low but the org keeps blaming Growth'
+      ],
+      'Money': [
+        'No one really knows where the money is until something goes wrong',
+        'Budget exists on paper but does not reflect reality',
+        'Financial decisions are made reactively',
+        'One person holds all financial knowledge and access',
+        'The org confuses growth — people in the funnel — with financial health'
+      ],
+      'Administration': [
+        'Institutional knowledge lives in one person\'s head',
+        'Contracts, compliance, and legal requirements are addressed only when something goes wrong',
+        'Scheduling and coordination are constant sources of friction',
+        'Tools and technology are adopted randomly without a clear strategy',
+        'The org regularly reinvents the wheel because nothing is documented'
+      ],
+      'People and Team': [
+        'Roles exist but expectations are unclear or inconsistently communicated',
+        'New people are thrown in without adequate orientation or support',
+        'Development happens informally or not at all',
+        'The same people carry everything because no one else has been developed to help',
+        'Leadership pipeline is empty, succession is never discussed',
+        'People leave not because of pay but because of lack of growth or recognition'
+      ]
+    };
+
+    /* ------------------------------------------------------------------
        SHOW RESULTS
+       Surfaces the "underdeveloped looks like" content for the
+       bottom two systems the user ranked.
        ------------------------------------------------------------------ */
     function showResults() {
       const names = [...list.querySelectorAll('.rank-name')].map(n => n.textContent);
+      const bottomTwo = [names[4], names[5]];
 
-      document.getElementById('zone-strength').textContent  = names[0] + ' and ' + names[1];
-      document.getElementById('zone-developing').textContent = names[2] + ' and ' + names[3];
-      document.getElementById('zone-focus').textContent     = names[4] + ' and ' + names[5];
+      const container = document.getElementById('focus-items');
+      container.innerHTML = bottomTwo.map((name, i) => {
+        const bullets = (systemData[name] || [])
+          .map(b => `<li>${b}</li>`).join('');
+        return `
+          <div class="focus-system">
+            <div class="focus-rank">YOUR #${i + 5} SYSTEM</div>
+            <h3 class="focus-name">${name}</h3>
+            <div class="focus-section-label">UNDERDEVELOPED LOOKS LIKE</div>
+            <ul class="focus-bullets">${bullets}</ul>
+          </div>
+        `;
+      }).join('');
 
       const results = document.getElementById('results');
       results.classList.add('visible');
