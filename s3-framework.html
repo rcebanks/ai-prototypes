@@ -143,8 +143,7 @@
        Pure typography. Centered. The type is the visual.
        ============================================================ */
     .hero {
-      max-width: 1280px;
-      margin: 0 auto;
+      background: var(--color-text);
       padding: 80px 48px 88px;
       border-bottom: 1px solid var(--color-border);
       text-align: center;
@@ -166,14 +165,14 @@
 
     .hero-rule {
       border: none;
-      border-top: 1px solid var(--color-border);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
       width: 64px;
       margin: 0 auto 28px;
     }
 
     .hero-headline {
       font-family: var(--font-display);
-      color: var(--color-text);
+      color: var(--color-bg);
       line-height: 1;
     }
 
@@ -188,7 +187,7 @@
       display: block;
       font-size: clamp(28px, 4vw, 56px);
       margin-top: 16px;
-      color: var(--color-secondary);
+      color: rgba(245, 240, 232, 0.6);
       font-style: italic;
     }
 
@@ -199,19 +198,19 @@
       font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.06em;
-      color: var(--color-accent);
+      color: var(--color-bg);
       background: transparent;
-      border: 1px solid var(--color-accent);
+      border: 1px solid rgba(245, 240, 232, 0.45);
       border-radius: 50px;
       padding: 14px 36px;
       cursor: pointer;
-      transition: background-color 200ms ease, color 200ms ease;
+      transition: background-color 200ms ease, border-color 200ms ease;
     }
 
     .btn-hero:hover,
     .btn-hero:focus {
-      background-color: var(--color-accent);
-      color: #FFFFFF;
+      background-color: rgba(245, 240, 232, 0.12);
+      border-color: var(--color-bg);
       outline: none;
     }
 
