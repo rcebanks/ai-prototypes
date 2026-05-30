@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rank Your Six Systems — S³</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+
+    /* ============================================================
+       CUSTOM PROPERTIES
+       ============================================================ */
+    :root {
+      --color-bg:        #F5F0E8;
+      --color-text:      #1A1A1A;
+      --color-secondary: #5C5550;
+      --color-accent:    #C4632A;
+      --color-border:    #D9D2C8;
+      --color-white:     #FFFFFF;
+      --color-strength:  #3A7D44;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============================================================
+       PAGE LAYOUT
+       ============================================================ */
+    .page {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 52px 24px 80px;
+    }
+
+    .back-link {
+      display: inline-block;
+      font-size: 13px;
+      color: var(--color-secondary);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      margin-bottom: 44px;
+      transition: color 150ms;
+    }
+    .back-link:hover { color: var(--color-accent); }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 7vw, 58px);
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .page-intro {
+      font-size: 16px;
+      color: var(--color-secondary);
+      line-height: 1.75;
+      margin-bottom: 44px;
+    }
+
+    /* ============================================================
+       RANK ZONE LABELS
+       ============================================================ */
+    .zone-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 6px 0;
+    }
+    .zone-label.top    { color: var(--color-strength); }
+    .zone-label.bottom { color: var(--color-accent); }
+
+    /* ============================================================
+       SORTABLE LIST
+       ============================================================ */
+    #rank-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .rank-item {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: grab;
+      user-select: none;
+      transition: box-shadow 200ms ease, border-color 200ms ease,
+                  opacity 200ms ease, transform 150ms ease;
+    }
+
+    .rank-item:active { cursor: grabbing; }
+
+    .rank-item.dragging {
+      opacity: 0.3;
+      cursor: grabbing;
+    }
+
+    .rank-item.drag-over {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(196, 99, 42, 0.15);
+      transform: scale(1.01);
+    }
+
+    /* Drag handle dots */
+    .drag-handle {
+      display: grid;
+      grid-template-columns: repeat(2, 4px);
+      gap: 3px;
+      flex-shrink: 0;
+      opacity: 0.35;
+    }
+    .drag-handle span {
+      width: 4px;
+      height: 4px;
+      background: var(--color-text);
+      border-radius: 50%;
+      display: block;
+    }
+
+    /* Rank number */
+    .rank-num {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-accent);
+      width: 28px;
+      text-align: center;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    /* System name */
+    .rank-name {
+      font-size: 15px;
+      font-weight: 500;
+      flex: 1;
+    }
+
+    /* Up / down arrow buttons — visible always, especially useful on mobile */
+    .rank-move {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+
+    .btn-move {
+      background: none;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      width: 28px;
+      height: 22px;
+      cursor: pointer;
+      font-size: 11px;
+      color: var(--color-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 150ms, color 150ms, background 150ms;
+    }
+    .btn-move:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* ============================================================
+       SEE RESULTS BUTTON
+       ============================================================ */
+    .btn-results {
+      margin-top: 32px;
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-white);
+      background: var(--color-accent);
+      border: none;
+      border-radius: 50px;
+      padding: 16px 32px;
+      cursor: pointer;
+      transition: opacity 200ms ease;
+    }
+    .btn-results:hover { opacity: 0.85; }
+
+    /* ============================================================
+       RESULTS PANEL
+       Hidden until "See My Results" is clicked
+       ============================================================ */
+    #results {
+      display: none;
+      margin-top: 52px;
+      padding-top: 44px;
+      border-top: 1px solid var(--color-border);
+      animation: fadeUp 500ms ease forwards;
+    }
+    #results.visible { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .results-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.1;
+      margin-bottom: 28px;
+    }
+
+    /* Result zone cards */
+    .result-zone {
+      border-radius: 10px;
+      border: 1px solid var(--color-border);
+      padding: 20px 24px;
+      margin-bottom: 14px;
+    }
+
+    .result-zone.strength  { background: #F4FAF4; border-color: #B5D9BA; }
+    .result-zone.developing { background: #FAF8F4; border-color: var(--color-border); }
+    .result-zone.focus     { background: #FDF6F0; border-color: #E8C4A8; }
+
+    .result-zone-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+    .result-zone.strength  .result-zone-label { color: var(--color-strength); }
+    .result-zone.developing .result-zone-label { color: var(--color-secondary); }
+    .result-zone.focus     .result-zone-label { color: var(--color-accent); }
+
+    .result-zone-names {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 6px;
+    }
+
+    .result-zone-note {
+      font-size: 13px;
+      color: var(--color-secondary);
+      line-height: 1.65;
+    }
+
+    /* Result CTA buttons */
+    .results-footer {
+      margin-top: 32px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-reset {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-secondary);
+      background: transparent;
+      border: 1px solid var(--color-border);
+      border-radius: 50px;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: border-color 150ms, color 150ms;
+    }
+    .btn-reset:hover { border-color: var(--color-text); color: var(--color-text); }
+
+    .btn-explore {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-accent);
+      background: transparent;
+      border: 1px solid var(--color-accent);
+      border-radius: 50px;
+      padding: 10px 24px;
+      text-decoration: none;
+      transition: background 150ms, color 150ms;
+      display: inline-block;
+    }
+    .btn-explore:hover { background: var(--color-accent); color: white; }
+
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <a href="s3-framework.html" class="back-link">&#8592; Back to S&#179; Framework</a>
+
+    <span class="eyebrow">INTERACTIVE TOOL</span>
+    <h1 class="page-title">Rank Your Six Systems</h1>
+    <p class="page-intro">
+      Drag to arrange the six systems from your strongest at the top to the one that needs the most work at the bottom. Be honest &#8212; this is for you.
+    </p>
+
+    <div class="zone-label top">STRONGEST</div>
+
+    <ul id="rank-list">
+
+      <li class="rank-item" draggable="true">
+        <div class="drag-handle">
+          <span></span><span></span>
+          <span></span><span></span>
+          <span></span><span></span>
+        </div>
+        <span class="rank-num">1</span>
+        <span class="rank-name">Strategic Management</span>
+        <div class="rank-move">
+          <button class="btn-move btn-up" aria-label="Move up">&#8593;</button>
+          <button class="btn-move btn-down" aria-label="Move down">&#8595;</button>
+        </div>
+      </li>
+
+      <li class="rank-item" draggable="true">
+        <div class="drag-handle">
+          <span></span><span></span>
+          <span></span><span></span>
+          <span></span><span></span>
+        </div>
+        <span class="rank-num">2</span>
+        <span class="rank-name">Growth</span>
+        <div class="rank-move">
+          <button class="btn-move btn-up" aria-label="Move up">&#8593;</button>
+          <button class="btn-move btn-down" aria-label="Move down">&#8595;</button>
+        </div>
+      </li>
+
+      <li class="rank-item" draggable="true">
+        <div class="drag-handle">
+          <span></span><span></span>
+          <span></span><span></span>
+          <span></span><span></span>
+        </div>
+        <span class="rank-num">3</span>
+        <span class="rank-name">Service Delivery and Operations</span>
+        <div class="rank-move">
+          <button class="btn-move btn-up" aria-label="Move up">&#8593;</button>
+          <button class="btn-move btn-down" aria-label="Move down">&#8595;</button>
+        </div>
+      </li>
+
+      <li class="rank-item" draggable="true">
+        <div class="drag-handle">
+          <span></span><span></span>
+          <span></span><span></span>
+          <span></span><span></span>
+        </div>
+        <span class="rank-num">4</span>
+        <span class="rank-name">Money</span>
+        <div class="rank-move">
+          <button class="btn-move btn-up" aria-label="Move up">&#8593;</button>
+          <button class="btn-move btn-down" aria-label="Move down">&#8595;</button>
+        </div>
+      </li>
+
+      <li class="rank-item" draggable="true">
+        <div class="drag-handle">
+          <span></span><span></span>
+          <span></span><span></span>
+          <span></span><span></span>
+        </div>
+        <span class="rank-num">5</span>
+        <span class="rank-name">Administration</span>
+        <div class="rank-move">
+          <button class="btn-move btn-up" aria-label="Move up">&#8593;</button>
+          <button class="btn-move btn-down" aria-label="Move down">&#8595;</button>
+        </div>
+      </li>
+
+      <li class="rank-item" draggable="true">
+        <div class="drag-handle">
+          <span></span><span></span>
+          <span></span><span></span>
+          <span></span><span></span>
+        </div>
+        <span class="rank-num">6</span>
+        <span class="rank-name">People and Team</span>
+        <div class="rank-move">
+          <button class="btn-move btn-up" aria-label="Move up">&#8593;</button>
+          <button class="btn-move btn-down" aria-label="Move down">&#8595;</button>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="zone-label bottom">NEEDS WORK</div>
+
+    <button class="btn-results" onclick="showResults()">See My Results &#8594;</button>
+
+    <!-- ============================================================
+         RESULTS — revealed after clicking See My Results
+         ============================================================ -->
+    <div id="results">
+      <h2 class="results-title">Here&#8217;s where you stand.</h2>
+
+      <div class="result-zone strength">
+        <div class="result-zone-label">STRENGTH ZONE &#8212; Ranks 1 &amp; 2</div>
+        <div class="result-zone-names" id="zone-strength"></div>
+        <div class="result-zone-note">These are working. Protect and document them so they hold as you grow.</div>
+      </div>
+
+      <div class="result-zone developing">
+        <div class="result-zone-label">DEVELOPING &#8212; Ranks 3 &amp; 4</div>
+        <div class="result-zone-names" id="zone-developing"></div>
+        <div class="result-zone-note">Present but inconsistent. A little intentional structure goes a long way here.</div>
+      </div>
+
+      <div class="result-zone focus">
+        <div class="result-zone-label">FOCUS ZONE &#8212; Ranks 5 &amp; 6</div>
+        <div class="result-zone-names" id="zone-focus"></div>
+        <div class="result-zone-note">These are costing you the most right now. This is where to start.</div>
+      </div>
+
+      <div class="results-footer">
+        <button class="btn-reset" onclick="resetRanking()">Start Over</button>
+        <a href="s3-framework.html" class="btn-explore">Explore All Six Systems &#8594;</a>
+      </div>
+    </div>
+
+  </div><!-- end .page -->
+
+
+  <script>
+
+    const list = document.getElementById('rank-list');
+    let dragSrc = null;
+
+    /* ------------------------------------------------------------------
+       SHUFFLE the list on load so it doesn't always start 1–6
+       ------------------------------------------------------------------ */
+    function shuffle() {
+      const items = [...list.querySelectorAll('.rank-item')];
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        list.appendChild(items[j]);
+        items.splice(j, 1);
+      }
+      updateNumbers();
+    }
+
+    /* ------------------------------------------------------------------
+       UPDATE RANK NUMBERS after any reorder
+       ------------------------------------------------------------------ */
+    function updateNumbers() {
+      list.querySelectorAll('.rank-item').forEach((item, i) => {
+        item.querySelector('.rank-num').textContent = i + 1;
+      });
+    }
+
+    /* ------------------------------------------------------------------
+       DRAG AND DROP (desktop)
+       ------------------------------------------------------------------ */
+    function initDragDrop() {
+      list.querySelectorAll('.rank-item').forEach(item => {
+
+        item.addEventListener('dragstart', (e) => {
+          dragSrc = item;
+          /* Small delay so the "ghost" shows the full item, not the faded one */
+          setTimeout(() => item.classList.add('dragging'), 0);
+          e.dataTransfer.effectAllowed = 'move';
+        });
+
+        item.addEventListener('dragend', () => {
+          item.classList.remove('dragging');
+          list.querySelectorAll('.rank-item').forEach(i => i.classList.remove('drag-over'));
+          updateNumbers();
+        });
+
+        item.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          if (item !== dragSrc) item.classList.add('drag-over');
+        });
+
+        item.addEventListener('dragleave', () => {
+          item.classList.remove('drag-over');
+        });
+
+        item.addEventListener('drop', (e) => {
+          e.preventDefault();
+          if (dragSrc && dragSrc !== item) {
+            const all = [...list.querySelectorAll('.rank-item')];
+            const srcIdx = all.indexOf(dragSrc);
+            const tgtIdx = all.indexOf(item);
+            list.insertBefore(dragSrc, srcIdx < tgtIdx ? item.nextSibling : item);
+          }
+          item.classList.remove('drag-over');
+          updateNumbers();
+        });
+      });
+    }
+
+    /* ------------------------------------------------------------------
+       UP / DOWN BUTTONS (mobile & keyboard users)
+       ------------------------------------------------------------------ */
+    list.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-move');
+      if (!btn) return;
+      const item = btn.closest('.rank-item');
+      if (btn.classList.contains('btn-up')) {
+        const prev = item.previousElementSibling;
+        if (prev) list.insertBefore(item, prev);
+      } else {
+        const next = item.nextElementSibling;
+        if (next) list.insertBefore(next, item);
+      }
+      updateNumbers();
+    });
+
+    /* ------------------------------------------------------------------
+       SHOW RESULTS
+       ------------------------------------------------------------------ */
+    function showResults() {
+      const names = [...list.querySelectorAll('.rank-name')].map(n => n.textContent);
+
+      document.getElementById('zone-strength').textContent  = names[0] + ' and ' + names[1];
+      document.getElementById('zone-developing').textContent = names[2] + ' and ' + names[3];
+      document.getElementById('zone-focus').textContent     = names[4] + ' and ' + names[5];
+
+      const results = document.getElementById('results');
+      results.classList.add('visible');
+      setTimeout(() => results.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+
+      /* Lock the list */
+      list.querySelectorAll('.rank-item').forEach(item => {
+        item.setAttribute('draggable', 'false');
+        item.style.cursor = 'default';
+      });
+      document.querySelector('.btn-results').style.display = 'none';
+    }
+
+    /* ------------------------------------------------------------------
+       RESET
+       ------------------------------------------------------------------ */
+    function resetRanking() {
+      document.getElementById('results').classList.remove('visible');
+      list.querySelectorAll('.rank-item').forEach(item => {
+        item.setAttribute('draggable', 'true');
+        item.style.cursor = 'grab';
+      });
+      document.querySelector('.btn-results').style.display = 'block';
+      shuffle();
+      initDragDrop();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* Init */
+    shuffle();
+    initDragDrop();
+
+  </script>
+
+</body>
+</html>
