@@ -581,7 +581,26 @@ body {
   </div>
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getFirestore, doc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+// ── FIREBASE SETUP ─────────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey:            "AIzaSyA0E8AWXDTawixGJM69JL0sUAyXP2Dr-yY",
+  authDomain:        "familyeventhub-6b41f.firebaseapp.com",
+  projectId:         "familyeventhub-6b41f",
+  storageBucket:     "familyeventhub-6b41f.firebasestorage.app",
+  messagingSenderId: "439666606677",
+  appId:             "1:439666606677:web:5b853c7288e86c68590adc"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth        = getAuth(firebaseApp);
+const db          = getFirestore(firebaseApp);
+const EVENTS_DOC  = doc(db, 'familyEventHub', 'events');
+
 // ── PASSWORD ───────────────────────────────────────────────────────
 const FAMILY_PASSWORD = "syblings26";
 
@@ -617,7 +636,12 @@ if (sessionStorage.getItem('fhh-auth')) {
 }
 
 // ── DATA ───────────────────────────────────────────────────────────
-const STORE = 'fhh-events';
+let events = [];
+let connected = false;
+
+function uid() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
 
 const DEFAULTS = [
   { id: uid(), name: "Mother's Day",   date: '2026-05-10', lead: 'TBD', status: 'Planning', url: '', notes: '', archived: false },
@@ -628,19 +652,13 @@ const DEFAULTS = [
   { id: uid(), name: 'Christmas',      date: '2026-12-25', lead: 'TBD', status: 'Planning', url: '', notes: '', archived: false },
 ];
 
-function uid() {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-}
-
 function loadEvents() {
-  const raw = localStorage.getItem(STORE);
-  if (raw) return JSON.parse(raw);
-  saveEvents(DEFAULTS);
-  return DEFAULTS;
+  return events;
 }
 
-function saveEvents(events) {
-  localStorage.setItem(STORE, JSON.stringify(events));
+function saveEvents(newEvents) {
+  events = newEvents;
+  setDoc(EVENTS_DOC, { events: newEvents }).catch(err => console.error('Save failed:', err));
 }
 
 // ── VIEWS ──────────────────────────────────────────────────────────
@@ -702,7 +720,13 @@ function renderList(events) {
   const tbody = document.getElementById('list-body');
   const empty = document.getElementById('list-empty');
   tbody.innerHTML = '';
-  if (!events.length) { empty.style.display = 'block'; return; }
+  if (!events.length) {
+    empty.style.display = 'block';
+    empty.innerHTML = connected
+      ? 'No events yet. Hit <strong>+ New Event</strong> to add the first one.'
+      : 'Connecting…';
+    return;
+  }
   empty.style.display = 'none';
 
   sortByDate(events).forEach(ev => {
@@ -934,8 +958,29 @@ function deleteEvent(id) {
   renderAll();
 }
 
-// ── INIT ───────────────────────────────────────────────────────────
-if (sessionStorage.getItem('fhh-auth')) renderAll();
+// ── FIREBASE SYNC ──────────────────────────────────────────────────
+signInAnonymously(auth)
+  .then(() => {
+    onSnapshot(EVENTS_DOC, snap => {
+      connected = true;
+      if (snap.exists()) {
+        events = snap.data().events || [];
+      } else {
+        events = DEFAULTS;
+        setDoc(EVENTS_DOC, { events });
+      }
+      if (sessionStorage.getItem('fhh-auth')) renderAll();
+    });
+  })
+  .catch(err => console.error('Firebase error:', err));
+
+// ── EXPOSE TO GLOBAL SCOPE (required for type="module") ────────────
+Object.assign(window, {
+  checkPassword, signOut, setView, openModal, toggleDateSort,
+  toggleArchive, closeModal, closeModalOutside, archiveFromModal,
+  saveEvent, editEvent, archiveEvent, deleteEvent, restoreEvent,
+  calPrev, calNext
+});
 </script>
 </body>
 </html>
